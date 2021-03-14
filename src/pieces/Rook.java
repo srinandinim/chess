@@ -12,11 +12,15 @@ public class Rook extends Piece{
     public boolean move(Board board, int newRow, int newCol) {
 
         if (newRow != getRow() && newCol != getCol())
+            return false; //invalid rook move
+
+        if (board.getPiece(newRow, newCol) != null && board.getPiece(newRow, newCol).getColor() == getColor())
             return false;
 
+        setCol(newCol);
+        setRow(newRow);
         
-        
-        return false;
+        return true;
     }
 
     @Override
