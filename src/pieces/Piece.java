@@ -1,13 +1,14 @@
 package pieces;
 
+import chess.Board;
+
 public abstract class Piece {
 
 	private boolean white;
-	private int row;
-	private int col;
+	private int row, col;
 
 	public Piece(String color, int row, int col) {
-		if (color.equals("white")) {
+		if (color.toLowerCase().equals("white")) {
 			white = true;
 		} else {
 			white = false;
@@ -16,11 +17,23 @@ public abstract class Piece {
 		this.col = col;
 	}
 
-	public abstract boolean move (int newRow, int newCol);
-
+	public abstract boolean move(Board board, int newRow, int newCol);
+	
 	public abstract String toString();
-
-	public boolean getWhite() {
+	
+	public void getWhite(boolean white) {
+		this.white = white;
+	}
+	
+	public void setRow(int row) {
+		this.row = row;
+	}
+	
+	public void setCol(int col) {
+		this.col = col;
+	}
+	
+	public boolean isWhite() {
 		return white;
 	}
 
