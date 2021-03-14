@@ -4,15 +4,11 @@ import chess.Board;
 
 public abstract class Piece {
 
-	private boolean white;
+	private char color;
 	private int row, col;
 
-	public Piece(String color, int row, int col) {
-		if (color.toLowerCase().equals("white")) {
-			white = true;
-		} else {
-			white = false;
-		}
+	public Piece(char color, int row, int col) {
+		this.color = color;
 		this.row = row;
 		this.col = col;
 	}
@@ -21,8 +17,12 @@ public abstract class Piece {
 	
 	public abstract String toString();
 	
-	public void getWhite(boolean white) {
-		this.white = white;
+	public void setColor(char color) {
+		this.color = color;
+	}
+
+	public char getColor(){
+		return color;
 	}
 	
 	public void setRow(int row) {
@@ -31,10 +31,6 @@ public abstract class Piece {
 	
 	public void setCol(int col) {
 		this.col = col;
-	}
-	
-	public boolean isWhite() {
-		return white;
 	}
 
 	public int getRow() {
