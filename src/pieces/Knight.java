@@ -4,20 +4,32 @@ import chess.Board;
 
 public class Knight extends Piece {
 
-	public Knight(String color, int row, int col) {
+	public Knight(char color, int row, int col) {
 		super(color, row, col);
 	}
 	
 	@Override
 	public boolean move(Board board, int newRow, int newCol) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		int rowDist = Math.abs(getRow() - newRow);
+		int colDist = Math.abs(getCol() - newCol);
+		
+		if ((rowDist != 2 && colDist != 1) && (rowDist != 1 && colDist != 2)) {
+			return false;
+		}
+		
+		if (board.getPiece(newRow, newCol) != null && (board.getPiece(newRow, newCol).getColor() == getColor())) {
+			return false;
+		}
+		
+		setRow(newRow);
+		setCol(newCol);
+			
+		return true;
 	}
 	
 	@Override
 	public String toString() {
-		if (isWhite())
-			return "wN";
-		return "bN";
+		return getColor() + "N";
 	}
 }
