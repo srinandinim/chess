@@ -36,6 +36,10 @@ public class Board {
 		System.out.println();
 	}
 	
+	public int getDimension() {
+		return dimension;
+	}
+	
 	public Piece getPiece(int row, int col) {
 		return board[row][col];
 	}

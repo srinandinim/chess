@@ -10,7 +10,11 @@ public class Rook extends Piece{
 
     @Override
     public boolean move(Board board, int newRow, int newCol) {
-
+    	if (newRow < 1 || newRow > board.getDimension()-1)
+			return false;
+		if (newCol < 1 || newCol > board.getDimension()-1)
+			return false;
+		
         if (newRow != getRow() && newCol != getCol())
             return false; //invalid rook move
 

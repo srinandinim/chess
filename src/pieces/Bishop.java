@@ -10,7 +10,11 @@ public class Bishop extends Piece{
 
     @Override
     public boolean move(Board board, int newRow, int newCol) {
-        // TODO Auto-generated method stub
+    	if (newRow < 1 || newRow > board.getDimension()-1)
+			return false;
+		if (newCol < 1 || newCol > board.getDimension()-1)
+			return false;
+		
         return false;
     }
 

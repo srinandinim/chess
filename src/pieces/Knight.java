@@ -10,6 +10,10 @@ public class Knight extends Piece {
 	
 	@Override
 	public boolean move(Board board, int newRow, int newCol) {
+		if (newRow < 1 || newRow > board.getDimension()-1)
+			return false;
+		if (newCol < 1 || newCol > board.getDimension()-1)
+			return false;
 		
 		int rowDist = Math.abs(getRow() - newRow);
 		int colDist = Math.abs(getCol() - newCol);
