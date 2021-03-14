@@ -14,8 +14,17 @@ public class Bishop extends Piece{
 			return false;
 		if (newCol < 1 || newCol > board.getDimension()-1)
 			return false;
-		
-        return false;
+		        
+        if (Math.abs(newRow - getRow()) != Math.abs(newCol - getCol()))
+            return false;
+
+        if (board.getPiece(newRow, newCol) != null && board.getPiece(newRow, newCol).getColor() == getColor())
+            return false;
+
+        setCol(newCol);
+        setRow(newRow);
+        
+        return true;
     }
 
     @Override
