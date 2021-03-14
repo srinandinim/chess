@@ -1,1 +1,1 @@
-**Chess on the command line
+**Chess on the cmd
