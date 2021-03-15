@@ -5,15 +5,16 @@ import chess.Board;
 public abstract class Piece {
 
 	private char color;
-	private int row, col;
+	private char col;
+	private int row;
 
-	public Piece(char color, int row, int col) {
+	public Piece(char color, char col, int row) {
 		this.color = color;
 		this.row = row;
 		this.col = col;
 	}
 
-	public abstract boolean move(Board board, int newRow, int newCol);
+	public abstract boolean move(Board board, char newCol, int newRow);
 	
 	public abstract String toString();
 	
@@ -29,7 +30,7 @@ public abstract class Piece {
 		this.row = row;
 	}
 	
-	public void setCol(int col) {
+	public void setCol(char col) {
 		this.col = col;
 	}
 
@@ -37,7 +38,7 @@ public abstract class Piece {
 		return row;
 	}
 
-	public int getCol() {
+	public char getCol() {
 		return col;
 	}
 }
