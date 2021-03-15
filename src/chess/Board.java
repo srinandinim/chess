@@ -47,11 +47,18 @@ public class Board {
 		return board[rowCoordinate][colCoordinate];
 	}
 
-	public void setPiece(Piece piece, char col, int row) {
+	public void setPiece(Piece piece) {
+		int rowCoordinate = dimension - piece.getRow();
+		int colCoordinate = piece.getCol() - 'a';
+
+		board[rowCoordinate][colCoordinate] = piece;
+	}
+
+	public void nullLocation(char col, int row) {
 		int rowCoordinate = dimension - row;
 		int colCoordinate = col - 'a';
 
-		board[rowCoordinate][colCoordinate] = piece;
+		board[rowCoordinate][colCoordinate] = null;
 	}
 
 }
