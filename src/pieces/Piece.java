@@ -15,21 +15,21 @@ public abstract class Piece {
 	}
 
 	public abstract boolean move(Board board, char newCol, int newRow);
-	
+
 	public abstract String toString();
-	
+
 	public void setColor(char color) {
 		this.color = color;
 	}
 
-	public char getColor(){
+	public char getColor() {
 		return color;
 	}
-	
+
 	public void setRow(int row) {
 		this.row = row;
 	}
-	
+
 	public void setCol(char col) {
 		this.col = col;
 	}

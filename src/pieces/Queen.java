@@ -2,7 +2,7 @@ package pieces;
 
 import chess.Board;
 
-public class Queen extends Piece{
+public class Queen extends Piece {
 
     public Queen(char color, char col, int row) {
         super(color, col, row);
@@ -13,24 +13,24 @@ public class Queen extends Piece{
         if (newCol < 'a' || newCol > 'h')
             return false;
         if (newRow < 1 || newRow > board.getDimension())
-			return false;
-		        
+            return false;
+
         if (Math.abs(newRow - getRow()) != Math.abs(newCol - getCol()) && (newRow != getRow() && newCol != getCol()))
             return false;
 
         if (board.getPiece(newCol, newRow) != null && board.getPiece(newCol, newRow).getColor() == getColor())
             return false;
-        
+
         setCol(newCol);
         setRow(newRow);
-        
+
         return true;
 
     }
 
     @Override
     public String toString() {
-        return getColor()+"Q";
+        return getColor() + "Q";
     }
-    
+
 }

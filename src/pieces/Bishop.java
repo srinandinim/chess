@@ -2,7 +2,7 @@ package pieces;
 
 import chess.Board;
 
-public class Bishop extends Piece{
+public class Bishop extends Piece {
 
     public Bishop(char color, char col, int row) {
         super(color, col, row);
@@ -10,11 +10,11 @@ public class Bishop extends Piece{
 
     @Override
     public boolean move(Board board, char newCol, int newRow) {
-    	if (newCol < 'a' || newCol > 'h')
+        if (newCol < 'a' || newCol > 'h')
             return false;
         if (newRow < 1 || newRow > board.getDimension())
-			return false;
-		        
+            return false;
+
         if (Math.abs(newRow - getRow()) != Math.abs(newCol - getCol()))
             return false;
 
@@ -23,13 +23,13 @@ public class Bishop extends Piece{
 
         setCol(newCol);
         setRow(newRow);
-        
+
         return true;
     }
 
     @Override
     public String toString() {
-        return getColor()+"B";
+        return getColor() + "B";
     }
-    
+
 }

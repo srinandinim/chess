@@ -35,20 +35,20 @@ public class Board {
 
 		System.out.println();
 	}
-	
+
 	public int getDimension() {
 		return dimension;
 	}
-	
-	public Piece getPiece(char col, int row){
-		int rowCoordinate = dimension-row;
+
+	public Piece getPiece(char col, int row) {
+		int rowCoordinate = dimension - row;
 		int colCoordinate = col - 'a';
 
 		return board[rowCoordinate][colCoordinate];
 	}
-	
+
 	public void setPiece(Piece piece, char col, int row) {
-		int rowCoordinate = dimension-row;
+		int rowCoordinate = dimension - row;
 		int colCoordinate = col - 'a';
 
 		board[rowCoordinate][colCoordinate] = piece;
