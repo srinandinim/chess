@@ -18,9 +18,6 @@ public class Pawn extends Piece{
 		if (newCol < 1 || newCol > board.getDimension()-1)
 			return false;
 		
-		
-		
-		
 		initial = 1;
 		return false;
 	}

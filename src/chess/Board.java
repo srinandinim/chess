@@ -5,7 +5,7 @@ import pieces.Piece;
 public class Board {
 
 	private Piece[][] board;
-	private final int dimension = 9;
+	private final int dimension = 8;
 
 	public Board() {
 		board = new Piece[dimension][dimension];
@@ -16,8 +16,8 @@ public class Board {
 	}
 
 	public void printBoard() {
-		for (int i = 1; i < dimension; i++) {
-			for (int j = 1; j < dimension; j++) {
+		for (int i = 0; i < dimension; i++) {
+			for (int j = 0; j < dimension; j++) {
 				if (board[i][j] != null) {
 					System.out.print(board[i][j] + " ");
 				} else if (i % 2 != j % 2) {
@@ -29,8 +29,8 @@ public class Board {
 			System.out.println((dimension - i));
 		}
 
-		for (int i = 1; i < dimension; i++) {
-			System.out.print(" " + (char) (i + 96) + " ");
+		for (int i = 0; i < dimension; i++) {
+			System.out.print(" " + (char) (i + 97) + " ");
 		}
 
 		System.out.println();
@@ -40,12 +40,18 @@ public class Board {
 		return dimension;
 	}
 	
-	public Piece getPiece(int row, int col) {
-		return board[row][col];
+	public Piece getPiece(int row, char col) {
+		int rowCoordinate = dimension-row;
+		int colCoordinate = col - 'a';
+
+		return board[rowCoordinate][colCoordinate];
 	}
 	
-	public void setPiece(Piece piece, int row, int col) {
-		board[row][col] = piece;
+	public void setPiece(Piece piece, int row, char col) {
+		int rowCoordinate = dimension-row;
+		int colCoordinate = col - 'a';
+
+		board[rowCoordinate][colCoordinate] = piece;
 	}
 
 }
