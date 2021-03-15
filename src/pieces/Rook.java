@@ -4,21 +4,21 @@ import chess.Board;
 
 public class Rook extends Piece{
 
-    public Rook(char color, int row, int col) {
-        super(color, row, col);
+    public Rook(char color, char col, int row) {
+        super(color, col, row);
     }
 
     @Override
-    public boolean move(Board board, int newRow, int newCol) {
-    	if (newRow < 1 || newRow > board.getDimension()-1)
-			return false;
-		if (newCol < 1 || newCol > board.getDimension()-1)
+    public boolean move(Board board, char newCol, int newRow) {
+    	if (newCol < 'a' || newCol > 'h')
+            return false;
+        if (newRow < 1 || newRow > board.getDimension())
 			return false;
 		
         if (newRow != getRow() && newCol != getCol())
-            return false; //invalid rook move
+            return false;
 
-        if (board.getPiece(newRow, newCol) != null && board.getPiece(newRow, newCol).getColor() == getColor())
+        if (board.getPiece(newCol, newRow) != null && board.getPiece(newCol, newRow).getColor() == getColor())
             return false;
 
         setCol(newCol);

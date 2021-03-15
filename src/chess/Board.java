@@ -40,14 +40,14 @@ public class Board {
 		return dimension;
 	}
 	
-	public Piece getPiece(int row, char col) {
+	public Piece getPiece(char col, int row){
 		int rowCoordinate = dimension-row;
 		int colCoordinate = col - 'a';
 
 		return board[rowCoordinate][colCoordinate];
 	}
 	
-	public void setPiece(Piece piece, int row, char col) {
+	public void setPiece(Piece piece, char col, int row) {
 		int rowCoordinate = dimension-row;
 		int colCoordinate = col - 'a';
 
