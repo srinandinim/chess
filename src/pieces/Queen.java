@@ -23,14 +23,28 @@ public class Queen extends Piece {
         
         if (Math.abs(newRow - getRow()) == Math.abs(newCol - getCol())){
             if ((getRow() - newRow) == (getCol() - newCol)){
-                for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++){
-                    if (board.getPiece((char) (i + getCol()), i) != null) 
-                        return false;
+                if (getRow() - newRow < 0){
+                    for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++){
+                        if (board.getPiece((char) (getCol() + (i - Math.min(getRow(), newRow))), i) != null) 
+                            return false;
+                    }
+                } else {
+                    for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++){
+                        if (board.getPiece((char) (getCol() - (Math.max(getRow(), newRow)) + i), i) != null) 
+                            return false;
+                    }
                 }
             } else {
-                for (int i = Math.min(getCol(), newCol) + 1; i < Math.max(getCol(), newCol); i++){
-                    if (board.getPiece((char) i, getRow() - (i - Math.min(getCol(), newCol))) != null) 
-                        return false;
+                if (getRow() - newRow < 0){
+                    for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++){
+                        if (board.getPiece((char) (getCol() - (i - Math.min(getRow(), newRow))), i) != null) 
+                            return false;
+                    }
+                } else {
+                    for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++){
+                        if (board.getPiece((char) (getCol() + (Math.max(getRow(), newRow)) - i), i) != null) 
+                            return false;
+                    }
                 }
             }
         } else {
