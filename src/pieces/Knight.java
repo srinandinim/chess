@@ -9,7 +9,7 @@ public class Knight extends Piece {
 	}
 
 	@Override
-	public boolean move(Board board, char newCol, int newRow) {
+	public boolean canMove(Board board, char newCol, int newRow) {
 		if (newCol < 'a' || newCol > 'h')
 			return false;
 		if (newRow < 1 || newRow > board.getDimension())
@@ -26,8 +26,7 @@ public class Knight extends Piece {
 			return false;
 		}
 
-		setRow(newRow);
-		setCol(newCol);
+		move(board, newCol, newRow);
 
 		return true;
 	}

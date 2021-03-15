@@ -9,7 +9,7 @@ public class Rook extends Piece {
     }
 
     @Override
-    public boolean move(Board board, char newCol, int newRow) {
+    public boolean canMove(Board board, char newCol, int newRow) {
         if (newCol < 'a' || newCol > 'h')
             return false;
         if (newRow < 1 || newRow > board.getDimension())
@@ -33,9 +33,8 @@ public class Rook extends Piece {
             }
         }
 
-        setCol(newCol);
-        setRow(newRow);
-
+        move(board, newCol, newRow);
+        
         return true;
     }
 

@@ -14,9 +14,18 @@ public abstract class Piece {
 		this.col = col;
 	}
 
-	public abstract boolean move(Board board, char newCol, int newRow);
+	public abstract boolean canMove(Board board, char newCol, int newRow);
 
 	public abstract String toString();
+
+	public void move(Board board, char newCol, int newRow){
+		board.nullLocation(getCol(), getRow());
+
+        setCol(newCol);
+        setRow(newRow);
+
+        board.setPiece(this);
+	}
 
 	public void setColor(char color) {
 		this.color = color;
