@@ -21,6 +21,19 @@ public class Bishop extends Piece {
         if (board.getPiece(newCol, newRow) != null && board.getPiece(newCol, newRow).getColor() == getColor())
             return false;
 
+
+        if ((getRow() - newRow) == (getCol() - newCol)){
+            for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++){
+                if (board.getPiece((char) (i + getCol()), i) != null) 
+                    return false;
+            }
+        } else {
+            for (int i = Math.min(getCol(), newCol) + 1; i < Math.max(getCol(), newCol); i++){
+                if (board.getPiece((char) i, getRow() - (i - Math.min(getCol(), newCol))) != null) 
+                    return false;
+            }
+        }
+
         setCol(newCol);
         setRow(newRow);
 

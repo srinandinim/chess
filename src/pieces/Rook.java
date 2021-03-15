@@ -21,6 +21,18 @@ public class Rook extends Piece {
         if (board.getPiece(newCol, newRow) != null && board.getPiece(newCol, newRow).getColor() == getColor())
             return false;
 
+        if (newRow == getRow()){
+            for (int i = Math.min(getCol(), newCol) + 1; i < Math.max(getCol(), newCol); i++){
+                if (board.getPiece((char) i, newRow) != null) 
+                    return false;
+            }
+        } else if (newCol == getCol()){
+            for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++){
+                if (board.getPiece(newCol, i) != null) 
+                    return false;
+            }
+        }
+
         setCol(newCol);
         setRow(newRow);
 
