@@ -14,7 +14,7 @@ public class Board {
 	public void initBoard() {
 		initTopRow('b', 8);
 		initTopRow('w', 1);
-		
+
 		for (int i = 0; i < dimension; i++){
 			setPiece(new Pawn('w', (char) (i + 97), 2));
 			setPiece(new Pawn('b', (char) (i + 97), 7));
@@ -50,6 +50,7 @@ public class Board {
 			System.out.print(" " + (char) (i + 97) + " ");
 		}
 
+		System.out.println();
 		System.out.println();
 	}
 

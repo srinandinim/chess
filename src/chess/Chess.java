@@ -7,9 +7,14 @@ public class Chess {
 	public static void main(String[] args) {
 		Board board = new Board();
 		board.initBoard();
-		board.printBoard();
 
 		boolean move = true; // white: true
+		boolean done = false;
+
+		while (!done){
+			board.printBoard();
+			done = true;
+		}
 
 	}
 
