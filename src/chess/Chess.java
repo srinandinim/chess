@@ -89,18 +89,18 @@ public class Chess {
 		if (parts[0].length() != 2 || parts[1].length() != 2)
 			return false;
 
-		if (!board.inBounds(parts[0].charAt(0), (int) parts[0].charAt(1) - 48) || !board.inBounds(parts[1].charAt(0), (int) parts[1].charAt(1) - 48))
+		if (!board.inBounds(parts[0].charAt(0), (int) parts[0].charAt(1) - '0') || !board.inBounds(parts[1].charAt(0), (int) parts[1].charAt(1) - '0'))
 			return false;
 
-		Piece currentPiece = board.getPiece(parts[0].charAt(0), (int) parts[0].charAt(1) - 48);
+		Piece currentPiece = board.getPiece(parts[0].charAt(0), (int) parts[0].charAt(1) - '0');
 		if (currentPiece == null || currentPiece.getColor() != color)
 			return false;
 
-		Piece newLocation = board.getPiece(parts[1].charAt(0), (int) parts[1].charAt(1) - 48);
+		Piece newLocation = board.getPiece(parts[1].charAt(0), (int) parts[1].charAt(1) - '0');
 		if (newLocation != null && newLocation.getColor() == color)
 			return false;
 
-		if (!currentPiece.canMove(board, parts[1].charAt(0), (int) parts[1].charAt(1) - 48))
+		if (!currentPiece.canMove(board, parts[1].charAt(0), (int) parts[1].charAt(1) - '0'))
 			return false;
 		
 		return true;
@@ -166,7 +166,7 @@ public class Chess {
 		*/
 	}
 
-	public static boolean causesCheck(Piece piece, Board board, char col, int row){
+	public static boolean causesCheck(Piece piece, Board board, char col, int row){ //Can change Piece to just be the color probably
 
 		for (int i=col+1; i<='h'; i++){ //To the right
 			if (board.getPiece((char)i, row) != null){

@@ -16,8 +16,8 @@ public class Board {
 		initTopRow('w', 1);
 
 		for (int i = 0; i < dimension; i++){
-			setPiece(new Pawn('w', (char) (i + 97), 2));
-			setPiece(new Pawn('b', (char) (i + 97), 7));
+			setPiece(new Pawn('w', (char) (i + 'a'), 2));
+			setPiece(new Pawn('b', (char) (i + 'a'), 7));
 		}
 	}
 
