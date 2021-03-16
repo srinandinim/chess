@@ -8,7 +8,6 @@ public class Chess {
 
 	public static void main(String[] args) {
 		Board board = new Board();
-		board.initBoard();
 
 		boolean white_move = true;
 		char current_color = 'w';

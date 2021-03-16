@@ -9,9 +9,7 @@ public class Board {
 
 	public Board() {
 		board = new Piece[dimension][dimension];
-	}
-
-	public void initBoard() {
+		
 		initTopRow('b', 8);
 		initTopRow('w', 1);
 
