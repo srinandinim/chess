@@ -61,8 +61,6 @@ public class Queen extends Piece {
             }
         }
 
-        move(board, newCol, newRow);
-
         return true;
     }
 

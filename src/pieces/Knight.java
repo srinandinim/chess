@@ -26,8 +26,6 @@ public class Knight extends Piece {
 			return false;
 		}
 
-		move(board, newCol, newRow);
-
 		return true;
 	}
 

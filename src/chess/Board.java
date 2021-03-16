@@ -58,11 +58,21 @@ public class Board {
 		return dimension;
 	}
 
-	public Piece getPiece(char col, int row) {
+	public boolean inBounds(char col, int row){
 		int rowCoordinate = dimension - row;
 		int colCoordinate = col - 'a';
 
 		if (rowCoordinate >= dimension || colCoordinate >= dimension || rowCoordinate < 0 || colCoordinate < 0)
+			return false;
+		
+		return true;
+	}
+
+	public Piece getPiece(char col, int row) {
+		int rowCoordinate = dimension - row;
+		int colCoordinate = col - 'a';
+
+		if (!inBounds(col, row))
 			return null;
 
 		return board[rowCoordinate][colCoordinate];

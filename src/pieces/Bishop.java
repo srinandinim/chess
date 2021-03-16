@@ -48,8 +48,6 @@ public class Bishop extends Piece {
             }
         }
 
-        move(board, newCol, newRow);
-
         return true;
     }
 
