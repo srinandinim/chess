@@ -166,7 +166,7 @@ public class Chess {
 		*/
 	}
 
-	public boolean causesCheck(Piece piece, Board board, char col, int row){
+	public static boolean causesCheck(Piece piece, Board board, char col, int row){
 
 		for (int i=col+1; i<='h'; i++){ //To the right
 			if (board.getPiece((char)i, row) != null){

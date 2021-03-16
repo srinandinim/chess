@@ -4,8 +4,11 @@ import chess.Board;
 
 public class Rook extends Piece {
 
+    private boolean canCastle;
+
     public Rook(char color, char col, int row) {
         super(color, col, row);
+        canCastle = true;
     }
 
     @Override
@@ -32,13 +35,18 @@ public class Rook extends Piece {
                     return false;
             }
         }
-        
+
+        canCastle = true;
         return true;
     }
 
     @Override
     public String toString() {
         return getColor() + "R";
+    }
+
+    public boolean getCanCastle(){
+        return canCastle;
     }
 
 }
