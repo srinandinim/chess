@@ -62,6 +62,9 @@ public class Board {
 		int rowCoordinate = dimension - row;
 		int colCoordinate = col - 'a';
 
+		if (rowCoordinate >= dimension || colCoordinate >= dimension || rowCoordinate < 0 || colCoordinate < 0)
+			return null;
+
 		return board[rowCoordinate][colCoordinate];
 	}
 
