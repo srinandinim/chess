@@ -15,47 +15,35 @@ public class Pawn extends Piece {
 		if (newCol < 'a' || newCol > 'h')
 			return false;
 
+		boolean moveable = false;
+
 		if (getColor() == 'w') {
 			if (newCol == getCol()) {
 				if (board.getPiece(newCol, getRow() + 1) != null)
 					return false;
-				if (getRow() == 2 && newRow == 4) {
-					move(board, newCol, newRow);
-					return true;
-				}
-				if (getRow() + 1 == newRow) {
-					move(board, newCol, newRow);
-					return true;
-				}
-			} else if (getRow() + 1 == newRow && (getCol() + 1 == newCol || getCol() - 1 == newCol)) {
-				if (board.getPiece(newCol, newRow) != null && board.getPiece(newCol, newRow).getColor() == 'b') {
-					move(board, newCol, newRow);
-					return true;
-				}
-			}
+				else if (getRow() == 2 && newRow == 4)
+					moveable = true;
+				else if (getRow() + 1 == newRow)
+					moveable = true;
+			} else if (getRow() + 1 == newRow && (getCol() + 1 == newCol || getCol() - 1 == newCol))
+				if (board.getPiece(newCol, newRow) != null && board.getPiece(newCol, newRow).getColor() == 'b')
+					moveable = true;
 		}
 
 		if (getColor() == 'b') {
 			if (newCol == getCol()) {
 				if (board.getPiece(newCol, getRow() - 1) != null)
 					return false;
-				if (getRow() == 7 && newRow == 5) {
-					move(board, newCol, newRow);
-					return true;
-				}
-				if (getRow() - 1 == newRow) {
-					move(board, newCol, newRow);
-					return true;
-				}
-			} else if (getRow() - 1 == newRow && (getCol() + 1 == newCol || getCol() - 1 == newCol)) {
-				if (board.getPiece(newCol, newRow) != null && board.getPiece(newCol, newRow).getColor() == 'w') {
-					move(board, newCol, newRow);
-					return true;
-				}
-			}
+				else if (getRow() == 7 && newRow == 5)
+					moveable = true;
+				else if (getRow() - 1 == newRow)
+					moveable = true;
+			} else if (getRow() - 1 == newRow && (getCol() + 1 == newCol || getCol() - 1 == newCol))
+				if (board.getPiece(newCol, newRow) != null && board.getPiece(newCol, newRow).getColor() == 'w') 
+					moveable = true;
 		}
 
-		return false;
+		return moveable;
 	}
 
 	@Override

@@ -64,12 +64,7 @@ public class Chess {
 				draw = true;
 			}
 
-			Piece currentPiece = board.getPiece(input.split(" ")[0].charAt(0), (int) input.split(" ")[0].charAt(1) - 48);
-			char newCol = input.split(" ")[1].charAt(0);
-			int newRow = (int) input.split(" ")[1].charAt(1) - 48;
-			if (currentPiece.canMove(board, newCol, newRow)){
-				currentPiece.move(board, newCol, newRow);
-			}
+			board.getPiece(input.split(" ")[0].charAt(0), (int) input.split(" ")[0].charAt(1) - 48).move(board, input.split(" ")[1].charAt(0), (int) input.split(" ")[1].charAt(1) - 48);
 
 			white_move = !white_move;
 			System.out.println();
@@ -103,6 +98,9 @@ public class Chess {
 
 		Piece newLocation = board.getPiece(parts[1].charAt(0), (int) parts[1].charAt(1) - 48);
 		if (newLocation != null && newLocation.getColor() == color)
+			return false;
+
+		if (!currentPiece.canMove(board, parts[1].charAt(0), (int) parts[1].charAt(1) - 48))
 			return false;
 		
 		return true;
