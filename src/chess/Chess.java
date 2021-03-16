@@ -165,7 +165,7 @@ public class Chess {
 				break;
 			}
 		}
-		for (int i=col-1, j=row+1; i>='a' && j<=8; i--, j++){
+		for (int i=col+1, j=row+1; i<='h' && j<=8; i++, j++){
 			if (board.getPiece((char)i, j) != null){
 				Piece obj = board.getPiece((char)i, j);
 				if (obj.getColor() != piece.getColor() && (obj instanceof Bishop || obj instanceof Queen))
@@ -173,7 +173,7 @@ public class Chess {
 				break;
 			}
 		}
-		for (int i=col-1, j=row+1; i>='a' && j<=8; i--, j++){
+		for (int i=col+1, j=row-1; i<='h' && j>=1; i++, j--){
 			if (board.getPiece((char)i, j) != null){
 				Piece obj = board.getPiece((char)i, j);
 				if (obj.getColor() != piece.getColor() && (obj instanceof Bishop || obj instanceof Queen))
@@ -181,7 +181,7 @@ public class Chess {
 				break;
 			}
 		}
-		for (int i=col-1, j=row+1; i>='a' && j<=8; i--, j++){
+		for (int i=col-1, j=row-1; i>='a' && j>=1; i--, j--){
 			if (board.getPiece((char)i, j) != null){
 				Piece obj = board.getPiece((char)i, j);
 				if (obj.getColor() != piece.getColor() && (obj instanceof Bishop || obj instanceof Queen))
@@ -190,6 +190,41 @@ public class Chess {
 			}
 		}
 
+		if (piece.getColor() == 'w'){
+			if (board.getPiece((char)(col+1), row+1).getColor() == 'b' && board.getPiece((char)(col+1), row+1) instanceof Pawn)
+				return true;
+			if (board.getPiece((char)(col-1), row+1).getColor() == 'b' && board.getPiece((char)(col-1), row+1) instanceof Pawn)
+				return true;
+		}
+		if (piece.getColor() == 'b'){
+			if (board.getPiece((char)(col+1), row-1).getColor() == 'w' && board.getPiece((char)(col+1), row-1) instanceof Pawn)
+				return true;
+			if (board.getPiece((char)(col-1), row-1).getColor() == 'w' && board.getPiece((char)(col-1), row-1) instanceof Pawn)
+				return true;
+		}
+
+		for (int i = col-1; i<=col+1; i++){
+			if (board.getPiece((char)i, row+1) != null){
+				Piece obj = board.getPiece((char)i, row+1);
+				if (obj.getColor() != piece.getColor() && obj instanceof King)
+					return true;
+			}
+			if (board.getPiece((char)i, row-1) != null){
+				Piece obj = board.getPiece((char)i, row-1);
+				if (obj.getColor() != piece.getColor() && obj instanceof King)
+					return true;
+			}
+		}
+		if (board.getPiece((char)(col-1), row) != null){
+			Piece obj = board.getPiece((char)(col-1), row);
+			if (obj.getColor() != piece.getColor() && obj instanceof King)
+				return true;
+		}
+		if (board.getPiece((char)(col+1), row) != null){
+			Piece obj = board.getPiece((char)(col+1), row);
+			if (obj.getColor() != piece.getColor() && obj instanceof King)
+				return true;
+		}
 
 		return false;
 
