@@ -18,7 +18,7 @@ public class Knight extends Piece {
 		int rowDist = Math.abs(getRow() - newRow);
 		int colDist = Math.abs(getCol() - newCol);
 
-		if ((rowDist != 2 && colDist != 1) && (rowDist != 1 && colDist != 2)) {
+		if (!((rowDist == 2 && colDist == 1) || (rowDist == 1 && colDist == 2))) {
 			return false;
 		}
 

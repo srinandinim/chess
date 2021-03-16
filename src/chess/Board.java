@@ -1,6 +1,6 @@
 package chess;
 
-import pieces.Piece;
+import pieces.*;
 
 public class Board {
 
@@ -12,7 +12,24 @@ public class Board {
 	}
 
 	public void initBoard() {
+		initTopRow('b', 8);
+		initTopRow('w', 1);
+		
+		for (int i = 0; i < dimension; i++){
+			setPiece(new Pawn('w', (char) (i + 97), 2));
+			setPiece(new Pawn('b', (char) (i + 97), 7));
+		}
+	}
 
+	private void initTopRow(char color, int row){
+		setPiece(new Rook(color, 'a', row));
+		setPiece(new Rook(color, 'h', row));
+		setPiece(new Knight(color, 'b', row));
+		setPiece(new Knight(color, 'g', row));
+		setPiece(new Bishop(color, 'c', row));
+		setPiece(new Bishop(color, 'f', row));
+		setPiece(new Queen(color, 'd', row));
+		setPiece(new King(color, 'e', row));
 	}
 
 	public void printBoard() {
