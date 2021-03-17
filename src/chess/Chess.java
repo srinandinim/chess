@@ -53,13 +53,8 @@ public class Chess {
 			}
 
 			if (draw) {
-				if (input.equals("draw")) {
-					System.out.println("draw"); // TODO: check if we need to actually print draw or just call it day
-					done = true;
-					break;
-				} else {
-					draw = false;
-				}
+				done = true;
+				break;
 			}
 
 			if (input.contains("draw?")) {
@@ -68,6 +63,21 @@ public class Chess {
 
 			Piece currentPiece = board.getPiece(input.split(" ")[0].charAt(0), (int) input.split(" ")[0].charAt(1) - '0');
 			currentPiece.move(board, input.split(" ")[1].charAt(0), (int) input.split(" ")[1].charAt(1) - '0');
+
+			if (currentPiece instanceof Pawn){
+				if ((white_move && currentPiece.getRow() == 8) || (!white_move && currentPiece.getRow() == 1)) {
+					if (input.split(" ").length == 2)
+						board.setPiece(new Queen(currentPiece.getColor(), currentPiece.getCol(), currentPiece.getRow()));
+					else if (input.split(" ")[2].equals("R"))
+						board.setPiece(new Rook(currentPiece.getColor(), currentPiece.getCol(), currentPiece.getRow()));
+					else if (input.split(" ")[2].equals("N"))
+						board.setPiece(new Knight(currentPiece.getColor(), currentPiece.getCol(), currentPiece.getRow()));
+					else if (input.split(" ")[2].equals("B"))
+						board.setPiece(new Bishop(currentPiece.getColor(), currentPiece.getCol(), currentPiece.getRow()));
+					else if (input.split(" ")[2].equals("Q"))
+						board.setPiece(new Queen(currentPiece.getColor(), currentPiece.getCol(), currentPiece.getRow()));
+				}
+			}
 
 			if (causesCheck(board, white_move ? black_king.getColor() : white_king.getColor(), white_move ? black_king.getCol() : white_king.getCol(), white_move ? black_king.getRow() : white_king.getRow())) {
 				System.out.println ("Check"); // TODO: make sure this is right
@@ -83,6 +93,9 @@ public class Chess {
 	private static boolean containsValidArguments(Board board, Piece current_king, String input, boolean draw) {
 		char color = current_king.getColor();
 		String[] parts = input.split(" ");
+
+		if (draw && !input.equals("draw"))
+			return false;
 
 		if (parts.length == 1) {
 			if (parts[0].equals("resign"))
