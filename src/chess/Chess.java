@@ -10,12 +10,12 @@ public class Chess {
 		Board board = new Board();
 
 		boolean white_move = true;
-		char current_color = 'w';
 		boolean done = false;
 		boolean draw = false;
 
 		Piece white_king = board.getPiece('e', 1);
 		Piece black_king = board.getPiece('e', 8);
+		Piece current_king = white_king;
 
 		Scanner scanner = new Scanner(System.in);
 
@@ -24,15 +24,15 @@ public class Chess {
 
 			if (white_move) {
 				System.out.print("White's move: ");
-				current_color = 'w';
+				current_king = white_king;
 			} else {
 				System.out.print("Black's move: ");
-				current_color = 'b';
+				current_king = black_king;
 			}
 
 			String input = scanner.nextLine();
 
-			while (!containsValidArguments(board, current_color, input, draw)) {
+			while (!containsValidArguments(board, current_king, input, draw)) {
 				System.out.println("Illegal move, try again");
 				if (white_move) {
 					System.out.print("White's move: ");
@@ -69,6 +69,10 @@ public class Chess {
 			Piece currentPiece = board.getPiece(input.split(" ")[0].charAt(0), (int) input.split(" ")[0].charAt(1) - '0');
 			currentPiece.move(board, input.split(" ")[1].charAt(0), (int) input.split(" ")[1].charAt(1) - '0');
 
+			if (causesCheck(board, white_move ? black_king.getColor() : white_king.getColor(), white_move ? black_king.getCol() : white_king.getCol(), white_move ? black_king.getRow() : white_king.getRow())) {
+				System.out.println ("Check"); // TODO: make sure this is right
+			}
+
 			white_move = !white_move;
 			System.out.println();
 		}
@@ -76,8 +80,10 @@ public class Chess {
 		scanner.close();
 	}
 
-	private static boolean containsValidArguments(Board board, char color, String input, boolean draw) {
+	private static boolean containsValidArguments(Board board, Piece current_king, String input, boolean draw) {
+		char color = current_king.getColor();
 		String[] parts = input.split(" ");
+
 		if (parts.length == 1) {
 			if (parts[0].equals("resign"))
 				return true;
@@ -106,12 +112,26 @@ public class Chess {
 
 		if (!currentPiece.canMove(board, parts[1].charAt(0), (int) parts[1].charAt(1) - '0'))
 			return false;
+		// System.out.println ("failure1");
+
+		board.nullLocation(currentPiece.getCol(), currentPiece.getRow());
+		boolean inCheck = false;
+		if (currentPiece instanceof King)
+			inCheck = causesCheck(board, color, parts[1].charAt(0), (int) parts[1].charAt(1) - '0');
+		else 
+			inCheck = causesCheck(board, color, current_king.getCol(), current_king.getRow());
+		board.setPiece(currentPiece);
+		if (inCheck){
+			// System.out.println ("failure5");
+			return false;
+		}
+		// System.out.println ("failure4");
 
 		return true;
 	}
 
 	public static boolean causesCheck(Board board, char color, char col, int row) { 
-
+		// checks if a rook/queen can kill a piece at the given location
 		for (int i = col + 1; i <= 'h'; i++) {
 			if (board.getPiece((char) i, row) != null) {
 				Piece obj = board.getPiece((char) i, row);
@@ -145,7 +165,8 @@ public class Chess {
 			}
 		}
 
-		int colVals[] = {1,-1,1,-1,2,2,-2,-2}; // Knight moves
+		// checks if a knight can kill a piece at the given location
+		int colVals[] = {1,-1,1,-1,2,2,-2,-2};
 		int rowVals[] = {2,2,-2,-2,1,-1,1,-1};
 
 		for (int i=0; i<rowVals.length; i++){ 
@@ -156,6 +177,7 @@ public class Chess {
 			}
 		}
 
+		// checks if a bishop/queen can kill a piece at the given location
 		for (int i = col - 1, j = row + 1; i >= 'a' && j <= 8; i--, j++) { // upper left diagonal
 			if (board.getPiece((char) i, j) != null) {
 				Piece obj = board.getPiece((char) i, j);
@@ -189,45 +211,38 @@ public class Chess {
 			}
 		}
 
-		if (color == 'w') {
-			if (board.getPiece((char) (col + 1), row + 1).getColor() == 'b'
-					&& board.getPiece((char) (col + 1), row + 1) instanceof Pawn)
-				return true;
-			if (board.getPiece((char) (col - 1), row + 1).getColor() == 'b'
-					&& board.getPiece((char) (col - 1), row + 1) instanceof Pawn)
-				return true;
-		}
-		if (color == 'b') {
-			if (board.getPiece((char) (col + 1), row - 1).getColor() == 'w'
-					&& board.getPiece((char) (col + 1), row - 1) instanceof Pawn)
-				return true;
-			if (board.getPiece((char) (col - 1), row - 1).getColor() == 'w'
-					&& board.getPiece((char) (col - 1), row - 1) instanceof Pawn)
-				return true;
-		}
+		// checks if a pawn can kill a piece at the given location
+		int pawnRow = row + 1;
+		if (color == 'b')
+			pawnRow = row - 1;
 
+		if (board.getPiece((char) (col + 1), pawnRow) != null && board.getPiece((char) (col + 1), pawnRow).getColor() != color && board.getPiece((char) (col + 1), pawnRow) instanceof Pawn)
+			return true;
+		if (board.getPiece((char) (col - 1), pawnRow) != null && board.getPiece((char) (col - 1), pawnRow).getColor() != color && board.getPiece((char) (col - 1), pawnRow) instanceof Pawn)
+			return true;
+
+		// checks if the king can kill a piece at the given location
 		for (int i = col - 1; i <= col + 1; i++) {
-			if (board.getPiece((char) i, row + 1) != null) { //top row
+			// top row
+			if (board.getPiece((char) i, row + 1) != null) { 
 				Piece obj = board.getPiece((char) i, row + 1);
 				if (obj.getColor() != color && obj instanceof King)
 					return true;
 			}
-			if (board.getPiece((char) i, row - 1) != null) { // bottom row
-				Piece obj = board.getPiece((char) i, row - 1);
+			// left & right spaces
+			if (i != col && board.getPiece((char) (i), row) != null) {
+				Piece obj = board.getPiece((char) (i), row);
 				if (obj.getColor() != color && obj instanceof King)
 					return true;
 			}
-		}
-		for (int i = col - 1; i <= col + 1; i++){ //left and right space
-			if (i != col && board.getPiece((char) (i), row) != null) {
-				Piece obj = board.getPiece((char) (i), row);
+			// bottom row
+			if (board.getPiece((char) i, row - 1) != null) {
+				Piece obj = board.getPiece((char) i, row - 1);
 				if (obj.getColor() != color && obj instanceof King)
 					return true;
 			}
 		}
 
 		return false;
-
 	}
-
 }

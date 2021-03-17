@@ -41,7 +41,6 @@ public class King extends Piece{
                 }
             }
         }
-        
 
         if (Math.abs(newCol - getCol()) > 1 || Math.abs(newRow - getRow()) > 1)
             return false;
