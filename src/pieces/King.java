@@ -18,7 +18,7 @@ public class King extends Piece{
             return false;
         if (newRow < 1 || newRow > board.getDimension())
             return false;
-
+        /*
         if (!Chess.causesCheck(this, board, getCol(), getRow()) && canCastle && newCol == 'g' && newRow == getRow()){
             if (board.getPiece('f', getRow()) == null && board.getPiece('g', getRow()) == null){
                 if (board.getPiece('h', getRow()) instanceof Rook && ((Rook)board.getPiece('h', getRow())).getCanCastle()){
@@ -43,6 +43,7 @@ public class King extends Piece{
                 }
             }
         }
+        */
 
         if (Math.abs(newCol - getCol()) > 1 || Math.abs(newRow - getRow()) > 1)
             return false;
@@ -51,7 +52,6 @@ public class King extends Piece{
             return false;        
 
         canCastle = false;
-        move(board, newCol, newRow);
 
         return true;
     }

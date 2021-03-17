@@ -14,6 +14,9 @@ public class Chess {
 		boolean done = false;
 		boolean draw = false;
 
+		Piece white_king = board.getPiece('e', 1);
+		Piece black_king = board.getPiece('e', 8);
+
 		Scanner scanner = new Scanner(System.in);
 
 		while (!done) {
@@ -63,8 +66,9 @@ public class Chess {
 				draw = true;
 			}
 
-			board.getPiece(input.split(" ")[0].charAt(0), (int) input.split(" ")[0].charAt(1) - 48).move(board,
-					input.split(" ")[1].charAt(0), (int) input.split(" ")[1].charAt(1) - 48);
+			Piece currentPiece = board.getPiece(input.split(" ")[0].charAt(0),
+					(int) input.split(" ")[0].charAt(1) - '0');
+			currentPiece.move(board, input.split(" ")[1].charAt(0), (int) input.split(" ")[1].charAt(1) - '0');
 
 			white_move = !white_move;
 			System.out.println();
@@ -107,9 +111,9 @@ public class Chess {
 		return true;
 	}
 
-	public static boolean causesCheck(char color, Board board, char col, int row) { 
+	public static boolean causesCheck(Board board, char color, char col, int row) {
 
-		for (int i = col + 1; i <= 'h'; i++) { // To the right
+		for (int i = col + 1; i <= 'h'; i++) {
 			if (board.getPiece((char) i, row) != null) {
 				Piece obj = board.getPiece((char) i, row);
 				if (obj.getColor() != color && (obj instanceof Rook || obj instanceof Queen))
@@ -117,7 +121,7 @@ public class Chess {
 				break;
 			}
 		}
-		for (int i = col - 1; i >= 'a'; i--) { // To the left
+		for (int i = col - 1; i >= 'a'; i--) { 
 			if (board.getPiece((char) i, row) != null) {
 				Piece obj = board.getPiece((char) i, row);
 				if (obj.getColor() != color && (obj instanceof Rook || obj instanceof Queen))
@@ -125,7 +129,7 @@ public class Chess {
 				break;
 			}
 		}
-		for (int i = row + 1; i <= 8; i++) { // Going up
+		for (int i = row + 1; i <= 8; i++) {
 			if (board.getPiece(col, i) != null) {
 				Piece obj = board.getPiece(col, i);
 				if (obj.getColor() != color && (obj instanceof Rook || obj instanceof Queen))
@@ -133,7 +137,7 @@ public class Chess {
 				break;
 			}
 		}
-		for (int i = row - 1; i >= 0; i--) { // Going down
+		for (int i = row - 1; i >= 0; i--) {
 			if (board.getPiece(col, i) != null) {
 				Piece obj = board.getPiece(col, i);
 				if (obj.getColor() != color && (obj instanceof Rook || obj instanceof Queen))
@@ -184,7 +188,7 @@ public class Chess {
 				return true;
 		}
 
-		for (int i = col - 1, j = row + 1; i >= 'a' && j <= 8; i--, j++) { // upper left diagonal 
+		for (int i = col - 1, j = row + 1; i >= 'a' && j <= 8; i--, j++) { // upper left diagonal
 			if (board.getPiece((char) i, j) != null) {
 				Piece obj = board.getPiece((char) i, j);
 				if (obj.getColor() != color && (obj instanceof Bishop || obj instanceof Queen))
@@ -192,7 +196,7 @@ public class Chess {
 				break;
 			}
 		}
-		for (int i = col + 1, j = row + 1; i <= 'h' && j <= 8; i++, j++) { // upper right diagonal 
+		for (int i = col + 1, j = row + 1; i <= 'h' && j <= 8; i++, j++) { // upper right diagonal
 			if (board.getPiece((char) i, j) != null) {
 				Piece obj = board.getPiece((char) i, j);
 				if (obj.getColor() != color && (obj instanceof Bishop || obj instanceof Queen))
@@ -200,7 +204,7 @@ public class Chess {
 				break;
 			}
 		}
-		for (int i = col + 1, j = row - 1; i <= 'h' && j >= 1; i++, j--) { // lower right diagonal 
+		for (int i = col + 1, j = row - 1; i <= 'h' && j >= 1; i++, j--) { // lower right diagonal
 			if (board.getPiece((char) i, j) != null) {
 				Piece obj = board.getPiece((char) i, j);
 				if (obj.getColor() != color && (obj instanceof Bishop || obj instanceof Queen))
