@@ -15,19 +15,18 @@ public class Pawn extends Piece {
 		if (newCol < 'a' || newCol > 'h')
 			return false;
 
-		boolean moveable = false;
-
 		if (getColor() == 'w') {
 			if (newCol == getCol()) {
 				if (board.getPiece(newCol, getRow() + 1) != null)
 					return false;
 				else if (getRow() == 2 && newRow == 4)
-					moveable = true;
+					return true;
 				else if (getRow() + 1 == newRow)
-					moveable = true;
-			} else if (getRow() + 1 == newRow && (getCol() + 1 == newCol || getCol() - 1 == newCol))
+					return true;
+			} else if (getRow() + 1 == newRow && (getCol() + 1 == newCol || getCol() - 1 == newCol)){
 				if (board.getPiece(newCol, newRow) != null && board.getPiece(newCol, newRow).getColor() == 'b')
-					moveable = true;
+					return true;
+			}
 		}
 
 		if (getColor() == 'b') {
@@ -35,15 +34,16 @@ public class Pawn extends Piece {
 				if (board.getPiece(newCol, getRow() - 1) != null)
 					return false;
 				else if (getRow() == 7 && newRow == 5)
-					moveable = true;
+					return false;
 				else if (getRow() - 1 == newRow)
-					moveable = true;
-			} else if (getRow() - 1 == newRow && (getCol() + 1 == newCol || getCol() - 1 == newCol))
+					return false;
+			} else if (getRow() - 1 == newRow && (getCol() + 1 == newCol || getCol() - 1 == newCol)){
 				if (board.getPiece(newCol, newRow) != null && board.getPiece(newCol, newRow).getColor() == 'w') 
-					moveable = true;
+					return false;
+			}
 		}
 
-		return moveable;
+		return false;
 	}
 
 	@Override
