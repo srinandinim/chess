@@ -49,4 +49,8 @@ public class Rook extends Piece {
         return canCastle;
     }
 
+    public void setCanCastle(boolean canCastle){
+        this.canCastle = canCastle;
+    }
+
 }

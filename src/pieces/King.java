@@ -23,10 +23,11 @@ public class King extends Piece{
             if (board.getPiece('f', getRow()) == null && board.getPiece('g', getRow()) == null){
                 if (board.getPiece('h', getRow()) instanceof Rook && ((Rook)board.getPiece('h', getRow())).getCanCastle()){
                     if (!Chess.causesCheck(board, getColor(), 'f', getRow())){
+                        ((Rook)board.getPiece('h', getRow())).setCanCastle(false);
+                        board.getPiece('h', getRow()).move(board, 'f', getRow());
                         canCastle = false;
                         return true;
                     }
-
                 }
             }
         }
@@ -35,6 +36,8 @@ public class King extends Piece{
             if (board.getPiece('b', getRow()) == null && board.getPiece('c', getRow()) == null && board.getPiece('d', getRow()) == null){
                 if (board.getPiece('a', getRow()) instanceof Rook && ((Rook)board.getPiece('a', getRow())).getCanCastle()){
                     if (!Chess.causesCheck(board, getColor(), 'd', getRow())){
+                        ((Rook)board.getPiece('a', getRow())).setCanCastle(false);
+                        board.getPiece('a', getRow()).move(board, 'd', getRow());
                         canCastle = false;
                         return true;
                     }
