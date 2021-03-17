@@ -66,8 +66,7 @@ public class Chess {
 				draw = true;
 			}
 
-			Piece currentPiece = board.getPiece(input.split(" ")[0].charAt(0),
-					(int) input.split(" ")[0].charAt(1) - '0');
+			Piece currentPiece = board.getPiece(input.split(" ")[0].charAt(0), (int) input.split(" ")[0].charAt(1) - '0');
 			currentPiece.move(board, input.split(" ")[1].charAt(0), (int) input.split(" ")[1].charAt(1) - '0');
 
 			white_move = !white_move;
@@ -111,7 +110,7 @@ public class Chess {
 		return true;
 	}
 
-	public static boolean causesCheck(Board board, char color, char col, int row) {
+	public static boolean causesCheck(Board board, char color, char col, int row) { 
 
 		for (int i = col + 1; i <= 'h'; i++) {
 			if (board.getPiece((char) i, row) != null) {
@@ -146,46 +145,15 @@ public class Chess {
 			}
 		}
 
-		if (board.getPiece((char) (col + 1), row + 2) != null) {
-			Piece obj = board.getPiece((char) (col + 1), row + 2);
-			if (obj.getColor() != color && obj instanceof Knight)
-				return true;
-		}
-		if (board.getPiece((char) (col - 1), row + 2) != null) {
-			Piece obj = board.getPiece((char) (col - 1), row + 2);
-			if (obj.getColor() != color && obj instanceof Knight)
-				return true;
-		}
-		if (board.getPiece((char) (col + 1), row - 2) != null) {
-			Piece obj = board.getPiece((char) (col + 1), row + 2);
-			if (obj.getColor() != color && obj instanceof Knight)
-				return true;
-		}
-		if (board.getPiece((char) (col - 1), row - 2) != null) {
-			Piece obj = board.getPiece((char) (col + 1), row + 2);
-			if (obj.getColor() != color && obj instanceof Knight)
-				return true;
-		}
+		int colVals[] = {1,-1,1,-1,2,2,-2,-2}; // Knight moves
+		int rowVals[] = {2,2,-2,-2,1,-1,1,-1};
 
-		if (board.getPiece((char) (col + 2), row + 1) != null) {
-			Piece obj = board.getPiece((char) (col + 2), row + 1);
-			if (obj.getColor() != color && obj instanceof Knight)
-				return true;
-		}
-		if (board.getPiece((char) (col + 2), row - 1) != null) {
-			Piece obj = board.getPiece((char) (col + 2), row - 1);
-			if (obj.getColor() != color && obj instanceof Knight)
-				return true;
-		}
-		if (board.getPiece((char) (col - 2), row + 1) != null) {
-			Piece obj = board.getPiece((char) (col - 2), row + 1);
-			if (obj.getColor() != color && obj instanceof Knight)
-				return true;
-		}
-		if (board.getPiece((char) (col - 2), row - 1) != null) {
-			Piece obj = board.getPiece((char) (col - 2), row - 1);
-			if (obj.getColor() != color && obj instanceof Knight)
-				return true;
+		for (int i=0; i<rowVals.length; i++){ 
+			if (board.getPiece((char) (col + colVals[i]), row + rowVals[i]) != null) {
+				Piece obj = board.getPiece((char) (col + colVals[i]), row + rowVals[i]);
+				if (obj.getColor() != color && obj instanceof Knight)
+					return true;
+			}
 		}
 
 		for (int i = col - 1, j = row + 1; i >= 'a' && j <= 8; i--, j++) { // upper left diagonal
@@ -239,26 +207,23 @@ public class Chess {
 		}
 
 		for (int i = col - 1; i <= col + 1; i++) {
-			if (board.getPiece((char) i, row + 1) != null) {
+			if (board.getPiece((char) i, row + 1) != null) { //top row
 				Piece obj = board.getPiece((char) i, row + 1);
 				if (obj.getColor() != color && obj instanceof King)
 					return true;
 			}
-			if (board.getPiece((char) i, row - 1) != null) {
+			if (board.getPiece((char) i, row - 1) != null) { // bottom row
 				Piece obj = board.getPiece((char) i, row - 1);
 				if (obj.getColor() != color && obj instanceof King)
 					return true;
 			}
 		}
-		if (board.getPiece((char) (col - 1), row) != null) {
-			Piece obj = board.getPiece((char) (col - 1), row);
-			if (obj.getColor() != color && obj instanceof King)
-				return true;
-		}
-		if (board.getPiece((char) (col + 1), row) != null) {
-			Piece obj = board.getPiece((char) (col + 1), row);
-			if (obj.getColor() != color && obj instanceof King)
-				return true;
+		for (int i = col - 1; i <= col + 1; i++){ //left and right space
+			if (i != col && board.getPiece((char) (i), row) != null) {
+				Piece obj = board.getPiece((char) (i), row);
+				if (obj.getColor() != color && obj instanceof King)
+					return true;
+			}
 		}
 
 		return false;

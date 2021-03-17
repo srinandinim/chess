@@ -18,13 +18,12 @@ public class King extends Piece{
             return false;
         if (newRow < 1 || newRow > board.getDimension())
             return false;
-        /*
-        if (!Chess.causesCheck(this, board, getCol(), getRow()) && canCastle && newCol == 'g' && newRow == getRow()){
+        
+        if (!Chess.causesCheck(board, getColor(), getCol(), getRow()) && canCastle && newCol == 'g' && newRow == getRow()){
             if (board.getPiece('f', getRow()) == null && board.getPiece('g', getRow()) == null){
                 if (board.getPiece('h', getRow()) instanceof Rook && ((Rook)board.getPiece('h', getRow())).getCanCastle()){
-                    if (!Chess.causesCheck(this, board, 'f', getRow())){
+                    if (!Chess.causesCheck(board, getColor(), 'f', getRow())){
                         canCastle = false;
-                        move(board, newCol, newRow);
                         return true;
                     }
 
@@ -32,18 +31,17 @@ public class King extends Piece{
             }
         }
 
-        if (!Chess.causesCheck(this, board, getCol(), getRow()) && canCastle && newCol == 'c' && newRow == getRow()){
+        if (!Chess.causesCheck(board, getColor(), getCol(), getRow()) && canCastle && newCol == 'c' && newRow == getRow()){
             if (board.getPiece('b', getRow()) == null && board.getPiece('c', getRow()) == null && board.getPiece('d', getRow()) == null){
                 if (board.getPiece('a', getRow()) instanceof Rook && ((Rook)board.getPiece('a', getRow())).getCanCastle()){
-                    if (!Chess.causesCheck(this, board, 'd', getRow())){
+                    if (!Chess.causesCheck(board, getColor(), 'd', getRow())){
                         canCastle = false;
-                        move(board, newCol, newRow);
                         return true;
                     }
                 }
             }
         }
-        */
+        
 
         if (Math.abs(newCol - getCol()) > 1 || Math.abs(newRow - getRow()) > 1)
             return false;
