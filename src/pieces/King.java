@@ -53,7 +53,7 @@ public class King extends Piece{
         canCastle = false;
         move(board, newCol, newRow);
 
-        return false;
+        return true;
     }
 
     @Override
