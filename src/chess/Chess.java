@@ -1,5 +1,6 @@
 package chess;
 
+import java.util.List;
 import java.util.Scanner;
 import pieces.*;
 
@@ -81,7 +82,9 @@ public class Chess {
 				}
 			}
 
-			if (causesCheck(board, white_move ? black_king.getColor() : white_king.getColor(), white_move ? black_king.getCol() : white_king.getCol(), white_move ? black_king.getRow() : white_king.getRow()).getBool()) { // Spicy Spicy
+			Pair checkmatePair = causesCheck(board, white_move ? black_king.getColor() : white_king.getColor(), white_move ? black_king.getCol() : white_king.getCol(), white_move ? black_king.getRow() : white_king.getRow()); // Spicy Spicy
+
+			if (checkmatePair.getBool()) { 
 				System.out.println ("Check"); // TODO: make sure this is right
 			}
 
@@ -133,7 +136,7 @@ public class Chess {
 		if (!currentPiece.canMove(board, parts[1].charAt(0), (int) parts[1].charAt(1) - '0'))
 			return false;
 
-		board.nullLocation(currentPiece.getCol(), currentPiece.getRow());
+		board.nullLocation(currentPiece.getCol(), currentPiece.getRow()); //TODO: Check again
 		boolean inCheck = false;
 		if (currentPiece instanceof King)
 			inCheck = causesCheck(board, color, parts[1].charAt(0), (int) parts[1].charAt(1) - '0').getBool();
@@ -264,4 +267,47 @@ public class Chess {
 
 		return new Pair(false, null);
 	}
+
+	private boolean isCheckmate(Board board, Piece attacker, Piece oppKing){
+
+		//King can move out of the way
+		//block or take out attacker
+		char col = oppKing.getCol();
+		int row = oppKing.getRow();
+
+		//King can move out of the way to a safe location
+		for (int i = col-1; i <= col+1; i++){
+			for (int j = row+1; j >= row-1; j--){
+				if ((i != col || j != row) && !causesCheck(board, oppKing.getColor(), (char) i, j).getBool())
+					return false;
+			}
+		}
+
+		List<Piece> list = board.getPiecesByColor(oppKing.getColor());
+
+		for (Piece piece: list){
+			if (piece instanceof King) continue;
+			if (piece.canMove(board, attacker.getCol(), attacker.getRow())){
+				char pieceCol = piece.getCol();
+				int pieceRow = piece.getRow();
+
+				piece.move(board, attacker.getCol(), attacker.getRow());
+
+				boolean causesCheck = causesCheck(board, oppKing.getColor(), oppKing.getCol(), oppKing.getRow()).getBool();
+
+				piece.move(board, pieceCol, pieceRow);
+				board.setPiece(attacker);
+
+				if (!causesCheck)
+					return false;
+			}
+		}
+
+		
+
+		return true;
+
+	}
+
+
 }

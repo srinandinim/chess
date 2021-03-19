@@ -1,5 +1,8 @@
 package chess;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import pieces.*;
 
 public class Board {
@@ -88,6 +91,20 @@ public class Board {
 		int colCoordinate = col - 'a';
 
 		board[rowCoordinate][colCoordinate] = null;
+	}
+
+	public List<Piece> getPiecesByColor(char color){
+
+		List<Piece> list = new ArrayList<>();
+
+		for (int i = 0; i < dimension; i++) {
+			for (int j = 0; j < dimension; j++) {
+				if (board[i][j] != null && (board[i][j].getColor() == color))
+					list.add(board[i][j]);
+			}
+		}
+
+		return list;
 	}
 
 }
