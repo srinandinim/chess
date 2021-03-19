@@ -125,7 +125,6 @@ public class Chess {
 
 		if (!currentPiece.canMove(board, parts[1].charAt(0), (int) parts[1].charAt(1) - '0'))
 			return false;
-		// System.out.println ("failure1");
 
 		board.nullLocation(currentPiece.getCol(), currentPiece.getRow());
 		boolean inCheck = false;
@@ -135,10 +134,8 @@ public class Chess {
 			inCheck = causesCheck(board, color, current_king.getCol(), current_king.getRow());
 		board.setPiece(currentPiece);
 		if (inCheck){
-			// System.out.println ("failure5");
 			return false;
 		}
-		// System.out.println ("failure4");
 
 		return true;
 	}
