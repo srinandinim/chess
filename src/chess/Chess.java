@@ -140,13 +140,21 @@ public class Chess {
 		if (!currentPiece.canMove(board, parts[1].charAt(0), (int) parts[1].charAt(1) - '0'))
 			return false;
 
-		board.nullLocation(currentPiece.getCol(), currentPiece.getRow()); //TODO: Check again
+		char currentPieceCol = currentPiece.getCol();
+		int currentPieceRow = currentPiece.getRow();
+
+		currentPiece.move(board, parts[1].charAt(0), (int) parts[1].charAt(1) - '0');
+
 		boolean inCheck = false;
 		if (currentPiece instanceof King)
 			inCheck = causesCheck(board, color, parts[1].charAt(0), (int) parts[1].charAt(1) - '0').getBool();
 		else 
 			inCheck = causesCheck(board, color, current_king.getCol(), current_king.getRow()).getBool();
-		board.setPiece(currentPiece);
+		
+		currentPiece.move(board, currentPieceCol, currentPieceRow);
+		if (newLocation != null)
+			board.setPiece(newLocation);
+
 		if (inCheck){
 			if (currentPiece instanceof Pawn)
 				((Pawn) currentPiece).setEnpassant(false);
