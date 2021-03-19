@@ -11,7 +11,6 @@ public class Chess {
 		Board board = new Board();
 
 		boolean white_move = true;
-		boolean done = false;
 		boolean draw = false;
 
 		Piece white_king = board.getPiece('e', 1);
@@ -23,7 +22,7 @@ public class Chess {
 
 		Scanner scanner = new Scanner(System.in);
 
-		while (!done) {
+		while (true) {
 			board.printBoard();
 
 			if (white_move) {
@@ -52,12 +51,10 @@ public class Chess {
 				else
 					System.out.println("White wins");
 
-				done = true;
 				break;
 			}
 
 			if (draw) {
-				done = true;
 				break;
 			}
 
@@ -86,7 +83,13 @@ public class Chess {
 			Pair checkmatePair = causesCheck(board, white_move ? black_king.getColor() : white_king.getColor(), white_move ? black_king.getCol() : white_king.getCol(), white_move ? black_king.getRow() : white_king.getRow()); // Spicy Spicy
 
 			if (checkmatePair.getBool()) { 
-				System.out.println ("Check"); // TODO: make sure this is right
+				if (isCheckmate(board, checkmatePair.getPiece(), white_move ? black_king : white_king)){
+					System.out.println("Checkmate");
+					System.out.println( white_move ? "White wins" : "Black wins");
+					break;
+				}
+				else
+					System.out.println ("Check");
 			}
 
 			if (previous_piece instanceof Pawn){
@@ -269,7 +272,7 @@ public class Chess {
 		return new Pair(false, null);
 	}
 
-	private boolean isCheckmate(Board board, Piece attacker, Piece oppKing){
+	private static boolean isCheckmate(Board board, Piece attacker, Piece oppKing){
 
 		char col = oppKing.getCol();
 		int row = oppKing.getRow();
