@@ -17,6 +17,9 @@ public class Chess {
 		Piece black_king = board.getPiece('e', 8);
 		Piece current_king = white_king;
 
+		Piece current_piece = null;
+		Piece previous_piece = null;
+
 		Scanner scanner = new Scanner(System.in);
 
 		while (!done) {
@@ -61,27 +64,32 @@ public class Chess {
 				draw = true;
 			}
 
-			Piece currentPiece = board.getPiece(input.split(" ")[0].charAt(0), (int) input.split(" ")[0].charAt(1) - '0');
-			currentPiece.move(board, input.split(" ")[1].charAt(0), (int) input.split(" ")[1].charAt(1) - '0');
+			current_piece = board.getPiece(input.split(" ")[0].charAt(0), (int) input.split(" ")[0].charAt(1) - '0');
+			current_piece.move(board, input.split(" ")[1].charAt(0), (int) input.split(" ")[1].charAt(1) - '0');
 
-			if (currentPiece instanceof Pawn){
-				if ((white_move && currentPiece.getRow() == 8) || (!white_move && currentPiece.getRow() == 1)) {
+			if (current_piece instanceof Pawn){
+				if ((white_move && current_piece.getRow() == 8) || (!white_move && current_piece.getRow() == 1)) {
 					if (input.split(" ").length == 2)
-						board.setPiece(new Queen(currentPiece.getColor(), currentPiece.getCol(), currentPiece.getRow()));
+						board.setPiece(new Queen(current_piece.getColor(), current_piece.getCol(), current_piece.getRow()));
 					else if (input.split(" ")[2].equals("R"))
-						board.setPiece(new Rook(currentPiece.getColor(), currentPiece.getCol(), currentPiece.getRow()));
+						board.setPiece(new Rook(current_piece.getColor(), current_piece.getCol(), current_piece.getRow()));
 					else if (input.split(" ")[2].equals("N"))
-						board.setPiece(new Knight(currentPiece.getColor(), currentPiece.getCol(), currentPiece.getRow()));
+						board.setPiece(new Knight(current_piece.getColor(), current_piece.getCol(), current_piece.getRow()));
 					else if (input.split(" ")[2].equals("B"))
-						board.setPiece(new Bishop(currentPiece.getColor(), currentPiece.getCol(), currentPiece.getRow()));
+						board.setPiece(new Bishop(current_piece.getColor(), current_piece.getCol(), current_piece.getRow()));
 					else if (input.split(" ")[2].equals("Q"))
-						board.setPiece(new Queen(currentPiece.getColor(), currentPiece.getCol(), currentPiece.getRow()));
+						board.setPiece(new Queen(current_piece.getColor(), current_piece.getCol(), current_piece.getRow()));
 				}
 			}
 
 			if (causesCheck(board, white_move ? black_king.getColor() : white_king.getColor(), white_move ? black_king.getCol() : white_king.getCol(), white_move ? black_king.getRow() : white_king.getRow())) {
 				System.out.println ("Check"); // TODO: make sure this is right
 			}
+
+			if (previous_piece instanceof Pawn){
+				((Pawn) previous_piece).setEnpassantable(false);
+			}
+			previous_piece = current_piece;
 
 			white_move = !white_move;
 			System.out.println();
@@ -134,6 +142,8 @@ public class Chess {
 			inCheck = causesCheck(board, color, current_king.getCol(), current_king.getRow());
 		board.setPiece(currentPiece);
 		if (inCheck){
+			if (currentPiece instanceof Pawn)
+				((Pawn) currentPiece).setEnpassant(false);
 			return false;
 		}
 
