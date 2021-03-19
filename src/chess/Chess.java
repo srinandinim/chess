@@ -1,7 +1,6 @@
 package chess;
 
 import java.util.Scanner;
-
 import pieces.*;
 
 public class Chess {
@@ -82,7 +81,7 @@ public class Chess {
 				}
 			}
 
-			if (causesCheck(board, white_move ? black_king.getColor() : white_king.getColor(), white_move ? black_king.getCol() : white_king.getCol(), white_move ? black_king.getRow() : white_king.getRow())) {
+			if (causesCheck(board, white_move ? black_king.getColor() : white_king.getColor(), white_move ? black_king.getCol() : white_king.getCol(), white_move ? black_king.getRow() : white_king.getRow()).getBool()) { // Spicy Spicy
 				System.out.println ("Check"); // TODO: make sure this is right
 			}
 
@@ -137,9 +136,9 @@ public class Chess {
 		board.nullLocation(currentPiece.getCol(), currentPiece.getRow());
 		boolean inCheck = false;
 		if (currentPiece instanceof King)
-			inCheck = causesCheck(board, color, parts[1].charAt(0), (int) parts[1].charAt(1) - '0');
+			inCheck = causesCheck(board, color, parts[1].charAt(0), (int) parts[1].charAt(1) - '0').getBool();
 		else 
-			inCheck = causesCheck(board, color, current_king.getCol(), current_king.getRow());
+			inCheck = causesCheck(board, color, current_king.getCol(), current_king.getRow()).getBool();
 		board.setPiece(currentPiece);
 		if (inCheck){
 			if (currentPiece instanceof Pawn)
@@ -150,13 +149,13 @@ public class Chess {
 		return true;
 	}
 
-	public static boolean causesCheck(Board board, char color, char col, int row) { 
+	public static Pair causesCheck(Board board, char color, char col, int row) { 
 		// checks if a rook/queen can kill a piece at the given location
 		for (int i = col + 1; i <= 'h'; i++) {
 			if (board.getPiece((char) i, row) != null) {
 				Piece obj = board.getPiece((char) i, row);
 				if (obj.getColor() != color && (obj instanceof Rook || obj instanceof Queen))
-					return true;
+					return new Pair(true, obj);
 				break;
 			}
 		}
@@ -164,7 +163,7 @@ public class Chess {
 			if (board.getPiece((char) i, row) != null) {
 				Piece obj = board.getPiece((char) i, row);
 				if (obj.getColor() != color && (obj instanceof Rook || obj instanceof Queen))
-					return true;
+					return new Pair(true, obj);
 				break;
 			}
 		}
@@ -172,7 +171,7 @@ public class Chess {
 			if (board.getPiece(col, i) != null) {
 				Piece obj = board.getPiece(col, i);
 				if (obj.getColor() != color && (obj instanceof Rook || obj instanceof Queen))
-					return true;
+					return new Pair(true, obj);
 				break;
 			}
 		}
@@ -180,7 +179,7 @@ public class Chess {
 			if (board.getPiece(col, i) != null) {
 				Piece obj = board.getPiece(col, i);
 				if (obj.getColor() != color && (obj instanceof Rook || obj instanceof Queen))
-					return true;
+					return new Pair(true, obj);
 				break;
 			}
 		}
@@ -193,7 +192,7 @@ public class Chess {
 			if (board.getPiece((char) (col + colVals[i]), row + rowVals[i]) != null) {
 				Piece obj = board.getPiece((char) (col + colVals[i]), row + rowVals[i]);
 				if (obj.getColor() != color && obj instanceof Knight)
-					return true;
+					return new Pair(true, obj);
 			}
 		}
 
@@ -202,7 +201,7 @@ public class Chess {
 			if (board.getPiece((char) i, j) != null) {
 				Piece obj = board.getPiece((char) i, j);
 				if (obj.getColor() != color && (obj instanceof Bishop || obj instanceof Queen))
-					return true;
+					return new Pair(true, obj);
 				break;
 			}
 		}
@@ -210,7 +209,7 @@ public class Chess {
 			if (board.getPiece((char) i, j) != null) {
 				Piece obj = board.getPiece((char) i, j);
 				if (obj.getColor() != color && (obj instanceof Bishop || obj instanceof Queen))
-					return true;
+					return new Pair(true, obj);
 				break;
 			}
 		}
@@ -218,7 +217,7 @@ public class Chess {
 			if (board.getPiece((char) i, j) != null) {
 				Piece obj = board.getPiece((char) i, j);
 				if (obj.getColor() != color && (obj instanceof Bishop || obj instanceof Queen))
-					return true;
+					return new Pair(true, obj);
 				break;
 			}
 		}
@@ -226,7 +225,7 @@ public class Chess {
 			if (board.getPiece((char) i, j) != null) {
 				Piece obj = board.getPiece((char) i, j);
 				if (obj.getColor() != color && (obj instanceof Bishop || obj instanceof Queen))
-					return true;
+					return new Pair(true, obj);
 				break;
 			}
 		}
@@ -237,9 +236,9 @@ public class Chess {
 			pawnRow = row - 1;
 
 		if (board.getPiece((char) (col + 1), pawnRow) != null && board.getPiece((char) (col + 1), pawnRow).getColor() != color && board.getPiece((char) (col + 1), pawnRow) instanceof Pawn)
-			return true;
+			return new Pair(true, board.getPiece((char) (col + 1), pawnRow));
 		if (board.getPiece((char) (col - 1), pawnRow) != null && board.getPiece((char) (col - 1), pawnRow).getColor() != color && board.getPiece((char) (col - 1), pawnRow) instanceof Pawn)
-			return true;
+			return new Pair(true, board.getPiece((char) (col - 1), pawnRow));
 
 		// checks if the king can kill a piece at the given location
 		for (int i = col - 1; i <= col + 1; i++) {
@@ -247,22 +246,22 @@ public class Chess {
 			if (board.getPiece((char) i, row + 1) != null) { 
 				Piece obj = board.getPiece((char) i, row + 1);
 				if (obj.getColor() != color && obj instanceof King)
-					return true;
+					return new Pair(true, obj);
 			}
 			// left & right spaces
 			if (i != col && board.getPiece((char) (i), row) != null) {
 				Piece obj = board.getPiece((char) (i), row);
 				if (obj.getColor() != color && obj instanceof King)
-					return true;
+					return new Pair(true, obj);
 			}
 			// bottom row
 			if (board.getPiece((char) i, row - 1) != null) {
 				Piece obj = board.getPiece((char) i, row - 1);
 				if (obj.getColor() != color && obj instanceof King)
-					return true;
+					return new Pair(true, obj);
 			}
 		}
 
-		return false;
+		return new Pair(false, null);
 	}
 }
