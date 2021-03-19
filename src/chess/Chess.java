@@ -1,5 +1,6 @@
 package chess;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import pieces.*;
@@ -270,8 +271,6 @@ public class Chess {
 
 	private boolean isCheckmate(Board board, Piece attacker, Piece oppKing){
 
-		//King can move out of the way
-		//block or take out attacker
 		char col = oppKing.getCol();
 		int row = oppKing.getRow();
 
@@ -283,16 +282,60 @@ public class Chess {
 			}
 		}
 
+		List<Character> colList = new ArrayList<>();
+		List<Integer> rowList = new ArrayList<>();
+
+		if (attacker instanceof Bishop || (attacker instanceof Queen && attacker.getCol() != oppKing.getCol() && attacker.getRow() != oppKing.getRow())){
+			if ((oppKing.getRow() - attacker.getRow()) == (oppKing.getCol() - attacker.getCol())){
+				if (oppKing.getRow() - attacker.getRow() < 0){
+					for (int i = Math.min(oppKing.getRow(), attacker.getRow()) + 1; i < Math.max(oppKing.getRow(), attacker.getRow()); i++){
+						rowList.add(i);
+						colList.add((char) (oppKing.getCol() + (i - Math.min(oppKing.getRow(), attacker.getRow()))));
+					}
+				} else {
+					for (int i = Math.min(oppKing.getRow(), attacker.getRow()) + 1; i < Math.max(oppKing.getRow(), attacker.getRow()); i++){
+						rowList.add(i);
+						colList.add((char) (oppKing.getCol() - (Math.max(oppKing.getRow(), attacker.getRow())) + i));
+					}
+				}
+			} else {
+				if (oppKing.getRow() - attacker.getRow() < 0){
+					for (int i = Math.min(oppKing.getRow(), attacker.getRow()) + 1; i < Math.max(oppKing.getRow(), attacker.getRow()); i++){
+						rowList.add(i);
+						colList.add((char) (oppKing.getCol() - (i - Math.min(oppKing.getRow(), attacker.getRow()))));
+					}
+				} else {
+					for (int i = Math.min(oppKing.getRow(), attacker.getRow()) + 1; i < Math.max(oppKing.getRow(), attacker.getRow()); i++){
+						rowList.add(i);
+						colList.add((char) (oppKing.getCol() + (Math.max(oppKing.getRow(), attacker.getRow())) - i));
+					}
+				}
+			}
+		}
+		else if (attacker instanceof Rook || attacker instanceof Queen){
+			if (oppKing.getCol() == attacker.getCol()){
+				for (int i = Math.min(attacker.getRow(), oppKing.getRow())+1; i < Math.max(attacker.getRow(), oppKing.getRow()); i++){
+					colList.add(oppKing.getCol());
+					rowList.add(i);
+				}
+			}
+			else{
+				for (int i = Math.min(attacker.getCol(), oppKing.getCol())+1; i < Math.max(attacker.getCol(), oppKing.getCol()); i++){
+					colList.add((char)i);
+					rowList.add(attacker.getRow());
+				}				
+			}
+		}
+
 		List<Piece> list = board.getPiecesByColor(oppKing.getColor());
 
 		for (Piece piece: list){
 			if (piece instanceof King) continue;
-			if (piece.canMove(board, attacker.getCol(), attacker.getRow())){
+			if (piece.canMove(board, attacker.getCol(), attacker.getRow())){ // kill the attacker
 				char pieceCol = piece.getCol();
 				int pieceRow = piece.getRow();
 
 				piece.move(board, attacker.getCol(), attacker.getRow());
-
 				boolean causesCheck = causesCheck(board, oppKing.getColor(), oppKing.getCol(), oppKing.getRow()).getBool();
 
 				piece.move(board, pieceCol, pieceRow);
@@ -301,9 +344,21 @@ public class Chess {
 				if (!causesCheck)
 					return false;
 			}
+			for (int i=0; i<colList.size(); i++){
+				if (piece.canMove(board, colList.get(i), rowList.get(i))){ // block the attacker
+					char pieceCol = piece.getCol();
+					int pieceRow = piece.getRow();
+	
+					piece.move(board, colList.get(i), rowList.get(i));
+					boolean causesCheck = causesCheck(board, oppKing.getColor(), oppKing.getCol(), oppKing.getRow()).getBool();
+	
+					piece.move(board, pieceCol, pieceRow);		
+					
+					if (!causesCheck)
+						return false;
+				}
+			}
 		}
-
-		
 
 		return true;
 
