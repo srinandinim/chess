@@ -68,15 +68,13 @@ public class Chess {
 
 			if (current_piece instanceof Pawn){
 				if ((white_move && current_piece.getRow() == 8) || (!white_move && current_piece.getRow() == 1)) {
-					if (input.split(" ").length == 2)
-						board.setPiece(new Queen(current_piece.getColor(), current_piece.getCol(), current_piece.getRow()));
-					else if (input.split(" ")[2].equals("R"))
+					if (input.split(" ").length > 2 && input.split(" ")[2].equals("R"))
 						board.setPiece(new Rook(current_piece.getColor(), current_piece.getCol(), current_piece.getRow()));
-					else if (input.split(" ")[2].equals("N"))
+					else if (input.split(" ").length > 2 && input.split(" ")[2].equals("N"))
 						board.setPiece(new Knight(current_piece.getColor(), current_piece.getCol(), current_piece.getRow()));
-					else if (input.split(" ")[2].equals("B"))
+					else if (input.split(" ").length > 2 && input.split(" ")[2].equals("B"))
 						board.setPiece(new Bishop(current_piece.getColor(), current_piece.getCol(), current_piece.getRow()));
-					else if (input.split(" ")[2].equals("Q"))
+					else
 						board.setPiece(new Queen(current_piece.getColor(), current_piece.getCol(), current_piece.getRow()));
 				}
 			}
@@ -286,7 +284,7 @@ public class Chess {
 		char col = oppKing.getCol();
 		int row = oppKing.getRow();
 
-		System.out.print("asdfghjk");
+		// System.out.print("asdfghjk");
 
 		//King can move out of the way to a safe location
 		for (int i = Math.max(col-1,'a'); i <= Math.min(col+1,'h'); i++){
@@ -297,7 +295,7 @@ public class Chess {
 				}
 			}
 		}
-		System.out.println("KING");
+		// System.out.println("KING");
 		List<Character> colList = new ArrayList<>();
 		List<Integer> rowList = new ArrayList<>();
 
@@ -343,8 +341,8 @@ public class Chess {
 			}
 		}
 
-		System.out.println(colList);
-		System.out.println(rowList);
+		// System.out.println(colList);
+		// System.out.println(rowList);
 
 		List<Piece> list = board.getPiecesByColor(oppKing.getColor());
 
