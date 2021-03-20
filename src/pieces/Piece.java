@@ -27,6 +27,9 @@ public abstract class Piece {
 
 	/** 
 	 * Super constructor for all pieces
+	 * @param color 
+	 * @param row
+	 * @param col
 	 */
 	public Piece(char color, char col, int row) {
 		this.color = color;

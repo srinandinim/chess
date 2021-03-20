@@ -17,7 +17,7 @@ public class Rook extends Piece {
 
     /** 
 	 * Initalizes a Rook
-     * @see Piece
+     * @see Piece#Piece(char, char, int)
 	 */
     public Rook(char color, char col, int row) {
         super(color, col, row);
