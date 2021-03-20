@@ -55,6 +55,7 @@ public class Chess {
 			}
 
 			if (draw) {
+				System.out.println("draw");
 				break;
 			}
 
@@ -285,6 +286,8 @@ public class Chess {
 		char col = oppKing.getCol();
 		int row = oppKing.getRow();
 
+		System.out.print("asdfghjk");
+
 		//King can move out of the way to a safe location
 		for (int i = col-1; i <= col+1; i++){
 			for (int j = row+1; j >= row-1; j--){
@@ -292,7 +295,7 @@ public class Chess {
 					return false;
 			}
 		}
-
+		System.out.println("KING");
 		List<Character> colList = new ArrayList<>();
 		List<Integer> rowList = new ArrayList<>();
 
@@ -337,6 +340,9 @@ public class Chess {
 				}				
 			}
 		}
+
+		System.out.println(colList);
+		System.out.println(rowList);
 
 		List<Piece> list = board.getPiecesByColor(oppKing.getColor());
 
