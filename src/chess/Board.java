@@ -12,17 +12,17 @@ public class Board {
 
 	public Board() {
 		board = new Piece[dimension][dimension];
-		
+
 		initTopRow('b', 8);
 		initTopRow('w', 1);
 
-		for (int i = 0; i < dimension; i++){
+		for (int i = 0; i < dimension; i++) {
 			setPiece(new Pawn('w', (char) (i + 'a'), 2));
 			setPiece(new Pawn('b', (char) (i + 'a'), 7));
 		}
 	}
 
-	private void initTopRow(char color, int row){
+	private void initTopRow(char color, int row) {
 		setPiece(new Rook(color, 'a', row));
 		setPiece(new Rook(color, 'h', row));
 		setPiece(new Knight(color, 'b', row));
@@ -59,13 +59,13 @@ public class Board {
 		return dimension;
 	}
 
-	public boolean inBounds(char col, int row){
+	public boolean inBounds(char col, int row) {
 		int rowCoordinate = dimension - row;
 		int colCoordinate = col - 'a';
 
 		if (rowCoordinate >= dimension || colCoordinate >= dimension || rowCoordinate < 0 || colCoordinate < 0)
 			return false;
-		
+
 		return true;
 	}
 
@@ -93,7 +93,7 @@ public class Board {
 		board[rowCoordinate][colCoordinate] = null;
 	}
 
-	public List<Piece> getPiecesByColor(char color){
+	public List<Piece> getPiecesByColor(char color) {
 
 		List<Piece> list = new ArrayList<>();
 

@@ -18,13 +18,13 @@ public abstract class Piece {
 
 	public abstract String toString();
 
-	public void move(Board board, char newCol, int newRow){
+	public void move(Board board, char newCol, int newRow) {
 		board.nullLocation(getCol(), getRow());
 
-        setCol(newCol);
-        setRow(newRow);
+		setCol(newCol);
+		setRow(newRow);
 
-        board.setPiece(this);
+		board.setPiece(this);
 	}
 
 	public void setColor(char color) {

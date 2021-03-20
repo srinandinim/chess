@@ -21,28 +21,27 @@ public class Bishop extends Piece {
         if (board.getPiece(newCol, newRow) != null && board.getPiece(newCol, newRow).getColor() == getColor())
             return false;
 
-
-        if ((getRow() - newRow) == (getCol() - newCol)){
-            if (getRow() - newRow < 0){
-                for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++){
-                    if (board.getPiece((char) (getCol() + (i - Math.min(getRow(), newRow))), i) != null) 
+        if ((getRow() - newRow) == (getCol() - newCol)) {
+            if (getRow() - newRow < 0) {
+                for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++) {
+                    if (board.getPiece((char) (getCol() + (i - Math.min(getRow(), newRow))), i) != null)
                         return false;
                 }
             } else {
-                for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++){
-                    if (board.getPiece((char) (getCol() - (Math.max(getRow(), newRow)) + i), i) != null) 
+                for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++) {
+                    if (board.getPiece((char) (getCol() - (Math.max(getRow(), newRow)) + i), i) != null)
                         return false;
                 }
             }
         } else {
-            if (getRow() - newRow < 0){
-                for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++){
-                    if (board.getPiece((char) (getCol() - (i - Math.min(getRow(), newRow))), i) != null) 
+            if (getRow() - newRow < 0) {
+                for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++) {
+                    if (board.getPiece((char) (getCol() - (i - Math.min(getRow(), newRow))), i) != null)
                         return false;
                 }
             } else {
-                for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++){
-                    if (board.getPiece((char) (getCol() + (Math.max(getRow(), newRow)) - i), i) != null) 
+                for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++) {
+                    if (board.getPiece((char) (getCol() + (Math.max(getRow(), newRow)) - i), i) != null)
                         return false;
                 }
             }

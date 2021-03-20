@@ -87,8 +87,8 @@ public class Pawn extends Piece {
 	}
 
 	@Override
-	public void move(Board board, char newCol, int newRow){
-		if (enpassant){
+	public void move(Board board, char newCol, int newRow) {
+		if (enpassant) {
 			board.nullLocation(newCol, getRow());
 		}
 		super.move(board, newCol, newRow);

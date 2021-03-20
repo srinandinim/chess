@@ -24,14 +24,14 @@ public class Rook extends Piece {
         if (board.getPiece(newCol, newRow) != null && board.getPiece(newCol, newRow).getColor() == getColor())
             return false;
 
-        if (newRow == getRow()){
-            for (int i = Math.min(getCol(), newCol) + 1; i < Math.max(getCol(), newCol); i++){
-                if (board.getPiece((char) i, newRow) != null) 
+        if (newRow == getRow()) {
+            for (int i = Math.min(getCol(), newCol) + 1; i < Math.max(getCol(), newCol); i++) {
+                if (board.getPiece((char) i, newRow) != null)
                     return false;
             }
-        } else if (newCol == getCol()){
-            for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++){
-                if (board.getPiece(newCol, i) != null) 
+        } else if (newCol == getCol()) {
+            for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++) {
+                if (board.getPiece(newCol, i) != null)
                     return false;
             }
         }
@@ -44,16 +44,16 @@ public class Rook extends Piece {
         return getColor() + "R";
     }
 
-    public boolean getCanCastle(){
+    public boolean getCanCastle() {
         return canCastle;
     }
 
-    public void setCanCastle(boolean canCastle){
+    public void setCanCastle(boolean canCastle) {
         this.canCastle = canCastle;
     }
 
     @Override
-    public void move(Board board, char newCol, int newRow){
+    public void move(Board board, char newCol, int newRow) {
         canCastle = false;
         super.move(board, newCol, newRow);
     }

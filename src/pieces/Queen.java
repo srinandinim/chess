@@ -20,42 +20,42 @@ public class Queen extends Piece {
 
         if (board.getPiece(newCol, newRow) != null && board.getPiece(newCol, newRow).getColor() == getColor())
             return false;
-        
-        if (Math.abs(newRow - getRow()) == Math.abs(newCol - getCol())){
-            if ((getRow() - newRow) == (getCol() - newCol)){
-                if (getRow() - newRow < 0){
-                    for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++){
-                        if (board.getPiece((char) (getCol() + (i - Math.min(getRow(), newRow))), i) != null) 
+
+        if (Math.abs(newRow - getRow()) == Math.abs(newCol - getCol())) {
+            if ((getRow() - newRow) == (getCol() - newCol)) {
+                if (getRow() - newRow < 0) {
+                    for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++) {
+                        if (board.getPiece((char) (getCol() + (i - Math.min(getRow(), newRow))), i) != null)
                             return false;
                     }
                 } else {
-                    for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++){
-                        if (board.getPiece((char) (getCol() - (Math.max(getRow(), newRow)) + i), i) != null) 
+                    for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++) {
+                        if (board.getPiece((char) (getCol() - (Math.max(getRow(), newRow)) + i), i) != null)
                             return false;
                     }
                 }
             } else {
-                if (getRow() - newRow < 0){
-                    for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++){
-                        if (board.getPiece((char) (getCol() - (i - Math.min(getRow(), newRow))), i) != null) 
+                if (getRow() - newRow < 0) {
+                    for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++) {
+                        if (board.getPiece((char) (getCol() - (i - Math.min(getRow(), newRow))), i) != null)
                             return false;
                     }
                 } else {
-                    for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++){
-                        if (board.getPiece((char) (getCol() + (Math.max(getRow(), newRow)) - i), i) != null) 
+                    for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++) {
+                        if (board.getPiece((char) (getCol() + (Math.max(getRow(), newRow)) - i), i) != null)
                             return false;
                     }
                 }
             }
         } else {
-            if (newRow == getRow()){
-                for (int i = Math.min(getCol(), newCol) + 1; i < Math.max(getCol(), newCol); i++){
-                    if (board.getPiece((char) i, newRow) != null) 
+            if (newRow == getRow()) {
+                for (int i = Math.min(getCol(), newCol) + 1; i < Math.max(getCol(), newCol); i++) {
+                    if (board.getPiece((char) i, newRow) != null)
                         return false;
                 }
-            } else if (newCol == getCol()){
-                for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++){
-                    if (board.getPiece(newCol, i) != null) 
+            } else if (newCol == getCol()) {
+                for (int i = Math.min(getRow(), newRow) + 1; i < Math.max(getRow(), newRow); i++) {
+                    if (board.getPiece(newCol, i) != null)
                         return false;
                 }
             }
