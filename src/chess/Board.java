@@ -57,7 +57,7 @@ public class Board {
 
 
 	/** 
-	 * Prints the complete board with the checkers and current pieces in their respective locations
+	 * Prints the complete board with the '##' and current pieces in their respective locations
 	 */
 	public void printBoard() {
 		for (int i = 0; i < dimension; i++) {
@@ -83,7 +83,7 @@ public class Board {
 
 	
 	/** 
-	 * Returns the board dimension
+	 * Gets the board dimension
 	 * @return int - Dimension
 	 */
 	public int getDimension() {
@@ -95,7 +95,7 @@ public class Board {
 	 * Checks if a position is within the boundaries of the board
 	 * @param col Character representing the column
 	 * @param row Row number
-	 * @return boolean - true if location is contained in the board, false if it is not
+	 * @return boolean - true if location is contained in the board, false otherwise
 	 */
 	public boolean inBounds(char col, int row) {
 		int rowCoordinate = dimension - row;
@@ -109,7 +109,7 @@ public class Board {
 
 	
 	/** 
-	 * Returns the piece at specified location
+	 * Gets the piece at specified location
 	 * @param col Character representing the desired column
 	 * @param row Row number
 	 * @return Piece - Piece at desired location

@@ -2,18 +2,29 @@ package pieces;
 
 import chess.Board;
 
+/** 
+ * Representation of a Knight
+ * @author Swapnil Napuri
+ * @author Srinandini Marpaka
+ */
+
 public class Knight extends Piece {
 
+	/** 
+	 * Initalizes a Knight
+     * @see Piece
+	 */
 	public Knight(char color, char col, int row) {
 		super(color, col, row);
 	}
 
 	
 	/** 
-	 * @param board
-	 * @param newCol
-	 * @param newRow
-	 * @return boolean
+	 * Checks if a Knight is legally allowed to move to the input location based on the movement rules for a Knight
+	 * @param board Current representation of the board
+	 * @param newCol Character of the new column to move to
+	 * @param newRow Row number of the new row to move to
+	 * @return boolean - true if input location is a valid location, false otherwise 
 	 */
 	@Override
 	public boolean canMove(Board board, char newCol, int newRow) {
@@ -38,10 +49,12 @@ public class Knight extends Piece {
 
 	
 	/** 
-	 * @return String
+	 * Output string used for printing
+	 * @return String - Output string
 	 */
 	@Override
 	public String toString() {
 		return getColor() + "N";
 	}
+	
 }

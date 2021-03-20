@@ -2,6 +2,12 @@ package pieces;
 
 import chess.Board;
 
+/** 
+ * Representation of a Pawn
+ * @author Swapnil Napuri
+ * @author Srinandini Marpaka
+ */
+
 public class Pawn extends Piece {
 
 	/** 
@@ -13,6 +19,10 @@ public class Pawn extends Piece {
 	 */
 	boolean enpassant;
 
+	/** 
+	 * Initalizes a Pawn
+     * @see Piece
+	 */
 	public Pawn(char color, char col, int row) {
 		super(color, col, row);
 		enpassantable = false;
@@ -21,10 +31,11 @@ public class Pawn extends Piece {
 
 	
 	/** 
-	 * @param board
-	 * @param newCol
-	 * @param newRow
-	 * @return boolean
+	 * Checks if a Pawn is legally allowed to move to the input location based on the movement rules for a Pawn
+	 * @param board Current representation of the board
+	 * @param newCol Character of the new column to move to
+	 * @param newRow Row number of the new row to move to
+	 * @return boolean - true if input location is a valid piece, false otherwise 
 	 */
 	@Override
 	public boolean canMove(Board board, char newCol, int newRow) {
@@ -85,8 +96,8 @@ public class Pawn extends Piece {
 
 	
 	/** 
-	 * Returns if Pawn is enpasasntable
-	 * @return boolean - true if it is, false it is not
+	 * Gets if Pawn is enpasasntable
+	 * @return boolean - true if it is, false otherwise
 	 */
 	public boolean getEnpassantable() {
 		return enpassantable;
@@ -103,8 +114,8 @@ public class Pawn extends Piece {
 
 	
 	/** 
-	 * Returns if the Pawn engaged in an en passant
-	 * @return boolean - true if it had, false if it had not
+	 * Gets if the Pawn engaged in an en passant
+	 * @return boolean - true if it had, false otherwise
 	 */
 	public boolean getEnpassant() {
 		return enpassant;
@@ -121,9 +132,11 @@ public class Pawn extends Piece {
 
 	
 	/** 
-	 * @param board
-	 * @param newCol
-	 * @param newRow
+	 * Moves the Pawn to the new location on the board and clears old location
+	 * @param board Current representation of the board
+	 * @param newCol Character of the new column to move to
+	 * @param newRow Row number of the new row to move to
+	 * @see Piece
 	 */
 	@Override
 	public void move(Board board, char newCol, int newRow) {
@@ -135,7 +148,8 @@ public class Pawn extends Piece {
 
 	
 	/** 
-	 * @return String
+	 * Output string used for printing
+	 * @return String - Output string
 	 */
 	@Override
 	public String toString() {

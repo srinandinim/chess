@@ -2,19 +2,30 @@ package pieces;
 
 import chess.Board;
 
+/** 
+ * Representation of a Queen
+ * @author Swapnil Napuri
+ * @author Srinandini Marpaka
+ */
+
 public class Queen extends Piece {
 
+    /** 
+	 * Initalizes a Queen
+     * @see Piece
+	 */
     public Queen(char color, char col, int row) {
         super(color, col, row);
     }
 
     
-    /** 
-     * @param board
-     * @param newCol
-     * @param newRow
-     * @return boolean
-     */
+	/** 
+	 * Checks if a Queen is legally allowed to move to the input location based on the movement rules for a Queen
+	 * @param board Current representation of the board
+	 * @param newCol Character of the new column to move to
+	 * @param newRow Row number of the new row to move to
+	 * @return boolean - true if input location is a valid location, false otherwise 
+	 */
     @Override
     public boolean canMove(Board board, char newCol, int newRow) {
         if (newCol < 'a' || newCol > 'h')
@@ -72,9 +83,10 @@ public class Queen extends Piece {
     }
 
     
-    /** 
-     * @return String
-     */
+	/** 
+	 * Output string used for printing
+	 * @return String - Output string
+	 */
     @Override
     public String toString() {
         return getColor() + "Q";

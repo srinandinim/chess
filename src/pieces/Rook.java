@@ -16,10 +16,8 @@ public class Rook extends Piece {
     private boolean canCastle;
 
     /** 
-	 * Initializes the Rook
-     * @param color Color of the Rook ('w'/'b')
-     * @param col Character representing the column of its initial position
-     * @param row Row number of its initial position
+	 * Initalizes a Rook
+     * @see Piece
 	 */
     public Rook(char color, char col, int row) {
         super(color, col, row);
@@ -27,12 +25,13 @@ public class Rook extends Piece {
     }
 
     
-    /** 
-     * @param board
-     * @param newCol
-     * @param newRow
-     * @return boolean
-     */
+	/** 
+	 * Checks if a Rook is legally allowed to move to the input location based on the movement rules for a Rook
+	 * @param board Current representation of the board
+	 * @param newCol Character of the new column to move to
+	 * @param newRow Row number of the new row to move to
+	 * @return boolean - true if input location is a valid location, false otherwise 
+	 */
     @Override
     public boolean canMove(Board board, char newCol, int newRow) {
         if (newCol < 'a' || newCol > 'h')
@@ -62,9 +61,10 @@ public class Rook extends Piece {
     }
 
     
-    /** 
-     * @return String
-     */
+	/** 
+	 * Output string used for printing
+	 * @return String - Output string
+	 */
     @Override
     public String toString() {
         return getColor() + "R";
@@ -72,8 +72,8 @@ public class Rook extends Piece {
 
     
     /** 
-     * Returns whether the Rook can castle
-     * @return boolean - true if it can castle, false if it cannot
+     * Gets whether the Rook can castle
+     * @return boolean - true if it can castle, false otherwise
      */
     public boolean getCanCastle() {
         return canCastle;
@@ -89,11 +89,13 @@ public class Rook extends Piece {
     }
 
     
-    /** 
-     * @param board
-     * @param newCol
-     * @param newRow
-     */
+	/** 
+	 * Moves the Rook to the new location on the board and clears old location
+	 * @param board Current representation of the board
+	 * @param newCol Character of the new column to move to
+	 * @param newRow Row number of the new row to move to
+	 * @see Piece
+	 */
     @Override
     public void move(Board board, char newCol, int newRow) {
         canCastle = false;

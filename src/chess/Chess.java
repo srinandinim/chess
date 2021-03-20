@@ -13,8 +13,8 @@ import pieces.*;
 
 public class Chess {
 
-	
 	/** 
+	 * Main method
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -121,11 +121,11 @@ public class Chess {
 	
 	/** 
 	 * Checks whether the user's desired move contains valid arguments and is valid
-	 * @param board Current gameboard 
-	 * @param current_king King of the current side ('w'/'b') 
-	 * @param input User inputted string, representing the move
-	 * @param draw Whether oppoinent requested a draw
-	 * @return boolean - true if desired move is valid, false if it is not
+	 * @param board Current representation of the board
+	 * @param current_king King of the current side
+	 * @param input User inputted string that represents the move
+	 * @param draw Whether opponent requested a draw
+	 * @return boolean - true if desired move is valid, false otherwise
 	 */
 	private static boolean containsValidArguments(Board board, Piece current_king, String input, boolean draw) {
 		char color = current_king.getColor();
@@ -190,7 +190,7 @@ public class Chess {
 	
 	/** 
 	 * Checks whether a King at a specified location would be in check
-	 * @param board Current gameboard
+	 * @param board Current representation of the board
 	 * @param color Color of the King
 	 * @param col Character representing the column of the King's location
 	 * @param row Row number of the King's location
@@ -319,10 +319,10 @@ public class Chess {
 	
 	/** 
 	 * Checks whether a given side is in checkmate
-	 * @param board Current gameboard
+	 * @param board Current representation of the board
 	 * @param attacker Piece that is causing the check
 	 * @param oppKing King of the opponent
-	 * @return boolean - true if the opponent is in checkmate, false it is not
+	 * @return boolean - true if the opponent is in checkmate, false otherwise
 	 */
 	private static boolean isCheckmate(Board board, Piece attacker, Piece oppKing) {
 

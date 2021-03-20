@@ -2,22 +2,36 @@ package pieces;
 
 import chess.*;
 
+/** 
+ * Representation of a King
+ * @author Swapnil Napuri
+ * @author Srinandini Marpaka
+ */
+
 public class King extends Piece {
 
+    /** 
+	 * Indicates whether the King has moved yet, therby impacting its ability to castle
+	 */
     private boolean canCastle;
 
+    /** 
+	 * Initalizes a King
+     * @see Piece
+	 */
     public King(char color, char col, int row) {
         super(color, col, row);
         canCastle = true;
     }
 
     
-    /** 
-     * @param board
-     * @param newCol
-     * @param newRow
-     * @return boolean
-     */
+	/** 
+	 * Checks if a King is legally allowed to move to the input location based on the movement rules for a King
+	 * @param board Current representation of the board
+	 * @param newCol Character of the new column to move to
+	 * @param newRow Row number of the new row to move to
+	 * @return boolean - true if input location is a valid piece, false otherwise 
+	 */
     @Override
     public boolean canMove(Board board, char newCol, int newRow) {
 
@@ -68,23 +82,26 @@ public class King extends Piece {
 
     
     /** 
-     * @return String
-     */
-    @Override
-    public String toString() {
-        return getColor() + "K";
-    }
-
-    
-    /** 
-     * @param board
-     * @param newCol
-     * @param newRow
+     * Moves the King to the new location on the board and clears old location
+     * @param board Current representation of the board
+	 * @param newCol Character of the new column to move to
+	 * @param newRow Row number of the new row to move to
+     * @see Piece
      */
     @Override
     public void move(Board board, char newCol, int newRow) {
         canCastle = false;
         super.move(board, newCol, newRow);
+    }
+
+
+	/** 
+	 * Output string used for printing
+	 * @return String - Output string
+	 */
+    @Override
+    public String toString() {
+        return getColor() + "K";
     }
 
 }
