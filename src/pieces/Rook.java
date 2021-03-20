@@ -2,10 +2,25 @@ package pieces;
 
 import chess.Board;
 
+/** 
+ * Representation of the Rook
+ * @author Swapnil Napuri
+ * @author Srinandini Marpaka
+ */
+
 public class Rook extends Piece {
 
+    /** 
+	 * Indicates whether the Rook has moved yet, therby impacting its ability to castle
+	 */
     private boolean canCastle;
 
+    /** 
+	 * Initializes the Rook
+     * @param color Color of the Rook ('w'/'b')
+     * @param col Character representing the column of its initial position
+     * @param row Row number of its initial position
+	 */
     public Rook(char color, char col, int row) {
         super(color, col, row);
         canCastle = true;
@@ -57,7 +72,8 @@ public class Rook extends Piece {
 
     
     /** 
-     * @return boolean
+     * Returns whether the Rook can castle
+     * @return boolean - true if it can castle, false if it cannot
      */
     public boolean getCanCastle() {
         return canCastle;
@@ -65,7 +81,8 @@ public class Rook extends Piece {
 
     
     /** 
-     * @param canCastle
+     * Sets whether the Rook can castle
+     * @param canCastle Boolean indicative of if it can castle or not
      */
     public void setCanCastle(boolean canCastle) {
         this.canCastle = canCastle;

@@ -5,6 +5,12 @@ import java.util.List;
 import java.util.Scanner;
 import pieces.*;
 
+/** 
+ * Contains overarching functionality, including that for gameplay
+ * @author Swapnil Napuri
+ * @author Srinandini Marpaka
+ */
+
 public class Chess {
 
 	
@@ -114,11 +120,12 @@ public class Chess {
 
 	
 	/** 
-	 * @param board
-	 * @param current_king
-	 * @param input
-	 * @param draw
-	 * @return boolean
+	 * Checks whether the user's desired move contains valid arguments and is valid
+	 * @param board Current gameboard 
+	 * @param current_king King of the current side ('w'/'b') 
+	 * @param input User inputted string, representing the move
+	 * @param draw Whether oppoinent requested a draw
+	 * @return boolean - true if desired move is valid, false if it is not
 	 */
 	private static boolean containsValidArguments(Board board, Piece current_king, String input, boolean draw) {
 		char color = current_king.getColor();
@@ -182,11 +189,12 @@ public class Chess {
 
 	
 	/** 
-	 * @param board
-	 * @param color
-	 * @param col
-	 * @param row
-	 * @return Pair
+	 * Checks whether a King at a specified location would be in check
+	 * @param board Current gameboard
+	 * @param color Color of the King
+	 * @param col Character representing the column of the King's location
+	 * @param row Row number of the King's location
+	 * @return Pair - Contains if the King is in check and if it is, an opposing piece causing it
 	 */
 	public static Pair causesCheck(Board board, char color, char col, int row) {
 		// checks if a rook/queen can kill a piece at the given location
@@ -310,10 +318,11 @@ public class Chess {
 
 	
 	/** 
-	 * @param board
-	 * @param attacker
-	 * @param oppKing
-	 * @return boolean
+	 * Checks whether a given side is in checkmate
+	 * @param board Current gameboard
+	 * @param attacker Piece that is causing the check
+	 * @param oppKing King of the opponent
+	 * @return boolean - true if the opponent is in checkmate, false it is not
 	 */
 	private static boolean isCheckmate(Board board, Piece attacker, Piece oppKing) {
 

@@ -4,7 +4,13 @@ import chess.Board;
 
 public class Pawn extends Piece {
 
+	/** 
+	 * Indicates whether the Pawn can engage in an En Passant
+	 */
 	boolean enpassantable;
+	/** 
+	 * Indicates whether the Pawn has engaged in an En Passant
+	 */
 	boolean enpassant;
 
 	public Pawn(char color, char col, int row) {
@@ -79,15 +85,17 @@ public class Pawn extends Piece {
 
 	
 	/** 
-	 * @return boolean
+	 * Returns if Pawn is enpasasntable
+	 * @return boolean - true if it is, false it is not
 	 */
 	public boolean getEnpassantable() {
 		return enpassantable;
 	}
 
 	
-	/** 
-	 * @param enpassantable
+	/**
+	 * Sets whether the Pawn is enpasasntable
+	 * @param enpassantable Boolean indicative of it can engage in an en passant or not
 	 */
 	public void setEnpassantable(boolean enpassantable) {
 		this.enpassantable = enpassantable;
@@ -95,7 +103,8 @@ public class Pawn extends Piece {
 
 	
 	/** 
-	 * @return boolean
+	 * Returns if the Pawn engaged in an en passant
+	 * @return boolean - true if it had, false if it had not
 	 */
 	public boolean getEnpassant() {
 		return enpassant;
@@ -103,7 +112,8 @@ public class Pawn extends Piece {
 
 	
 	/** 
-	 * @param enpassant
+	 * Sets whether the Pawn engaged in an en passant
+	 * @param enpassant Boolean indicative of if it engaged in an en passant or not 
 	 */
 	public void setEnpassant(boolean enpassant) {
 		this.enpassant = enpassant;
