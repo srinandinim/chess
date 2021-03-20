@@ -11,6 +11,13 @@ public class Rook extends Piece {
         canCastle = true;
     }
 
+    
+    /** 
+     * @param board
+     * @param newCol
+     * @param newRow
+     * @return boolean
+     */
     @Override
     public boolean canMove(Board board, char newCol, int newRow) {
         if (newCol < 'a' || newCol > 'h')
@@ -39,19 +46,37 @@ public class Rook extends Piece {
         return true;
     }
 
+    
+    /** 
+     * @return String
+     */
     @Override
     public String toString() {
         return getColor() + "R";
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean getCanCastle() {
         return canCastle;
     }
 
+    
+    /** 
+     * @param canCastle
+     */
     public void setCanCastle(boolean canCastle) {
         this.canCastle = canCastle;
     }
 
+    
+    /** 
+     * @param board
+     * @param newCol
+     * @param newRow
+     */
     @Override
     public void move(Board board, char newCol, int newRow) {
         canCastle = false;

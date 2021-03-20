@@ -13,6 +13,13 @@ public class Pawn extends Piece {
 		enpassant = false;
 	}
 
+	
+	/** 
+	 * @param board
+	 * @param newCol
+	 * @param newRow
+	 * @return boolean
+	 */
 	@Override
 	public boolean canMove(Board board, char newCol, int newRow) {
 		if (newRow < 1 || newRow > board.getDimension())
@@ -70,22 +77,44 @@ public class Pawn extends Piece {
 		return false;
 	}
 
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean getEnpassantable() {
 		return enpassantable;
 	}
 
+	
+	/** 
+	 * @param enpassantable
+	 */
 	public void setEnpassantable(boolean enpassantable) {
 		this.enpassantable = enpassantable;
 	}
 
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean getEnpassant() {
 		return enpassant;
 	}
 
+	
+	/** 
+	 * @param enpassant
+	 */
 	public void setEnpassant(boolean enpassant) {
 		this.enpassant = enpassant;
 	}
 
+	
+	/** 
+	 * @param board
+	 * @param newCol
+	 * @param newRow
+	 */
 	@Override
 	public void move(Board board, char newCol, int newRow) {
 		if (enpassant) {
@@ -94,6 +123,10 @@ public class Pawn extends Piece {
 		super.move(board, newCol, newRow);
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		return getColor() + "p";

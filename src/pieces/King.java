@@ -11,6 +11,13 @@ public class King extends Piece {
         canCastle = true;
     }
 
+    
+    /** 
+     * @param board
+     * @param newCol
+     * @param newRow
+     * @return boolean
+     */
     @Override
     public boolean canMove(Board board, char newCol, int newRow) {
 
@@ -59,11 +66,21 @@ public class King extends Piece {
         return true;
     }
 
+    
+    /** 
+     * @return String
+     */
     @Override
     public String toString() {
         return getColor() + "K";
     }
 
+    
+    /** 
+     * @param board
+     * @param newCol
+     * @param newRow
+     */
     @Override
     public void move(Board board, char newCol, int newRow) {
         canCastle = false;

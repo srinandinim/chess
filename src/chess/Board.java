@@ -5,11 +5,25 @@ import java.util.List;
 
 import pieces.*;
 
-public class Board {
+/** 
+ * This class encapsulates the 8*8 chess board that holds the game piece. 
+ * @author Swapnil Napuri
+ * @author Srinandini Marpaka
+ */
 
+public class Board {
+	
+	/** 
+	 * two-dimensional array that holds all pieces in play
+	 */
 	private Piece[][] board;
+
+	/** 
+	 * dimension of the board
+	 */
 	private final int dimension = 8;
 
+	
 	public Board() {
 		board = new Piece[dimension][dimension];
 
@@ -22,6 +36,11 @@ public class Board {
 		}
 	}
 
+	
+	/** 
+	 * @param color
+	 * @param row
+	 */
 	private void initTopRow(char color, int row) {
 		setPiece(new Rook(color, 'a', row));
 		setPiece(new Rook(color, 'h', row));
@@ -55,10 +74,21 @@ public class Board {
 		System.out.println();
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	public int getDimension() {
 		return dimension;
 	}
 
+	
+	/** 
+	 * 
+	 * @param col
+	 * @param row
+	 * @return boolean
+	 */
 	public boolean inBounds(char col, int row) {
 		int rowCoordinate = dimension - row;
 		int colCoordinate = col - 'a';
@@ -69,6 +99,12 @@ public class Board {
 		return true;
 	}
 
+	
+	/** 
+	 * @param col
+	 * @param row
+	 * @return Piece
+	 */
 	public Piece getPiece(char col, int row) {
 		int rowCoordinate = dimension - row;
 		int colCoordinate = col - 'a';
@@ -79,6 +115,10 @@ public class Board {
 		return board[rowCoordinate][colCoordinate];
 	}
 
+	
+	/** 
+	 * @param piece
+	 */
 	public void setPiece(Piece piece) {
 		int rowCoordinate = dimension - piece.getRow();
 		int colCoordinate = piece.getCol() - 'a';
@@ -86,6 +126,11 @@ public class Board {
 		board[rowCoordinate][colCoordinate] = piece;
 	}
 
+	
+	/** 
+	 * @param col
+	 * @param row
+	 */
 	public void nullLocation(char col, int row) {
 		int rowCoordinate = dimension - row;
 		int colCoordinate = col - 'a';
@@ -93,6 +138,11 @@ public class Board {
 		board[rowCoordinate][colCoordinate] = null;
 	}
 
+	
+	/** 
+	 * @param color
+	 * @return List<Piece>
+	 */
 	public List<Piece> getPiecesByColor(char color) {
 
 		List<Piece> list = new ArrayList<>();

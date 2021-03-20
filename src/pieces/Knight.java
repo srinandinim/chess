@@ -8,6 +8,13 @@ public class Knight extends Piece {
 		super(color, col, row);
 	}
 
+	
+	/** 
+	 * @param board
+	 * @param newCol
+	 * @param newRow
+	 * @return boolean
+	 */
 	@Override
 	public boolean canMove(Board board, char newCol, int newRow) {
 		if (newCol < 'a' || newCol > 'h')
@@ -29,6 +36,10 @@ public class Knight extends Piece {
 		return true;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		return getColor() + "N";

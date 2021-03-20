@@ -12,10 +12,18 @@ public class Pair {
 		this.piece = piece;
 	}
 
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean getBool() {
 		return bool;
 	}
 
+	
+	/** 
+	 * @return Piece
+	 */
 	public Piece getPiece() {
 		return piece;
 	}

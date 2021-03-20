@@ -7,6 +7,10 @@ import pieces.*;
 
 public class Chess {
 
+	
+	/** 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		Board board = new Board();
 
@@ -108,6 +112,14 @@ public class Chess {
 		scanner.close();
 	}
 
+	
+	/** 
+	 * @param board
+	 * @param current_king
+	 * @param input
+	 * @param draw
+	 * @return boolean
+	 */
 	private static boolean containsValidArguments(Board board, Piece current_king, String input, boolean draw) {
 		char color = current_king.getColor();
 		String[] parts = input.split(" ");
@@ -168,6 +180,14 @@ public class Chess {
 		return true;
 	}
 
+	
+	/** 
+	 * @param board
+	 * @param color
+	 * @param col
+	 * @param row
+	 * @return Pair
+	 */
 	public static Pair causesCheck(Board board, char color, char col, int row) {
 		// checks if a rook/queen can kill a piece at the given location
 		for (int i = col + 1; i <= 'h'; i++) {
@@ -288,6 +308,13 @@ public class Chess {
 		return new Pair(false, null);
 	}
 
+	
+	/** 
+	 * @param board
+	 * @param attacker
+	 * @param oppKing
+	 * @return boolean
+	 */
 	private static boolean isCheckmate(Board board, Piece attacker, Piece oppKing) {
 
 		char col = oppKing.getCol();
