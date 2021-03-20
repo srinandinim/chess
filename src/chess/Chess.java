@@ -88,7 +88,7 @@ public class Chess {
 					break;
 				}
 				else
-					System.out.println ("Check");
+					System.out.println("Check");
 			}
 
 			if (previous_piece instanceof Pawn){
@@ -284,18 +284,14 @@ public class Chess {
 		char col = oppKing.getCol();
 		int row = oppKing.getRow();
 
-		// System.out.print("asdfghjk");
-
 		//King can move out of the way to a safe location
 		for (int i = Math.max(col-1,'a'); i <= Math.min(col+1,'h'); i++){
 			for (int j = Math.min(row+1,8); j >= Math.max(row-1,1); j--){
 				if ((i != col || j != row) && board.getPiece((char) i, j) == null && !causesCheck(board, oppKing.getColor(), (char) i, j).getBool()){
-					System.out.println("returning false" + i +" "+ j);
 					return false;
 				}
 			}
 		}
-		// System.out.println("KING");
 		List<Character> colList = new ArrayList<>();
 		List<Integer> rowList = new ArrayList<>();
 
@@ -340,9 +336,6 @@ public class Chess {
 				}				
 			}
 		}
-
-		// System.out.println(colList);
-		// System.out.println(rowList);
 
 		List<Piece> list = board.getPiecesByColor(oppKing.getColor());
 

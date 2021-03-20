@@ -51,14 +51,18 @@ public class King extends Piece{
         if (board.getPiece(newCol, newRow) != null && board.getPiece(newCol, newRow).getColor() == getColor())
             return false;        
 
-        canCastle = false;
-
         return true;
     }
 
     @Override
     public String toString() {
         return getColor() + "K";
+    }
+
+    @Override
+    public void move(Board board, char newCol, int newRow){
+        canCastle = false;
+        super.move(board, newCol, newRow);
     }
     
 }

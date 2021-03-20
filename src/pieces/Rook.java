@@ -36,7 +36,6 @@ public class Rook extends Piece {
             }
         }
 
-        canCastle = true;
         return true;
     }
 
@@ -51,6 +50,12 @@ public class Rook extends Piece {
 
     public void setCanCastle(boolean canCastle){
         this.canCastle = canCastle;
+    }
+
+    @Override
+    public void move(Board board, char newCol, int newRow){
+        canCastle = false;
+        super.move(board, newCol, newRow);
     }
 
 }
