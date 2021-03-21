@@ -1,4 +1,10 @@
 # chess
-*Completed in collaboration between Swapnil Napuri & Srinandini Marpaka for Software Methodology (01:198:213)*
+*Completed in collaboration between Swapnil Napuri & Srinandini Marpaka*
 
-All use of this code must be consistent with the [DCS Academic Integrity Policy](https://www.cs.rutgers.edu/academics/undergraduate/academic-integrity-policy/programming-assignments) and the [Rutgers University Code of Student Conduct](http://studentconduct.rutgers.edu/student-conduct-processes/university-code-of-student-conduct/).
+### Description
+2-player text-based chess game on the command-line </br>
+Includes basic piece movement, en passant, castling, promotion, check, and checkmate </br>
+
+#### Piece Movement
+
+#### Promotion
