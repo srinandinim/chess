@@ -15,7 +15,7 @@ public class Chess {
 
 	/** 
 	 * Main method
-	 * @param args
+	 * @param args Command line argument
 	 */
 	public static void main(String[] args) {
 		Board board = new Board();

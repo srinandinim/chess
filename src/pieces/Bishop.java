@@ -12,7 +12,9 @@ public class Bishop extends Piece {
 
     /** 
 	 * Initalizes a Bishop
-     * @see Piece
+     * @param color Color of the piece
+	 * @param row Starting row number 
+	 * @param col Starting column character
 	 */
     public Bishop(char color, char col, int row) {
         super(color, col, row);

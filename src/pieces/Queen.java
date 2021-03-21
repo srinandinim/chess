@@ -12,7 +12,9 @@ public class Queen extends Piece {
 
     /** 
 	 * Initalizes a Queen
-     * @see Piece
+     * @param color Color of the piece
+	 * @param row Starting row number 
+	 * @param col Starting column character
 	 */
     public Queen(char color, char col, int row) {
         super(color, col, row);

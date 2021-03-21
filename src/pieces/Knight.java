@@ -12,7 +12,9 @@ public class Knight extends Piece {
 
 	/** 
 	 * Initalizes a Knight
-     * @see Piece
+     * @param color Color of the piece
+	 * @param row Starting row number 
+	 * @param col Starting column character
 	 */
 	public Knight(char color, char col, int row) {
 		super(color, col, row);

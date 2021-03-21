@@ -17,7 +17,9 @@ public class Rook extends Piece {
 
     /** 
 	 * Initalizes a Rook
-     * @see Piece#Piece(char, char, int)
+     * @param color Color of the piece
+	 * @param row Starting row number 
+	 * @param col Starting column character
 	 */
     public Rook(char color, char col, int row) {
         super(color, col, row);
@@ -94,7 +96,6 @@ public class Rook extends Piece {
 	 * @param board Current representation of the board
 	 * @param newCol Character of the new column to move to
 	 * @param newRow Row number of the new row to move to
-	 * @see Piece
 	 */
     @Override
     public void move(Board board, char newCol, int newRow) {
